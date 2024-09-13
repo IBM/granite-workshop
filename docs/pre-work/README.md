@@ -4,12 +4,13 @@ This section will give you InstrucLab background as well as guide you through th
 
 ## Background
 
-XXXXXXXXXXXX
+#### What is an LLM?
 
-## InstructLab Installation
+XXXX
 
-Expand from
-https://github.com/instructlab/instructlab/blob/main/README.md
+#### Why InstructLab?
+
+XXXXX
 
 ## Visual Studio Code
 
