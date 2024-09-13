@@ -1,162 +1,177 @@
 # Using the local AI co-pilot
 
-Lets play with our new found local AI Open Source AI!
+Lets play with our new found local AI InstructLab!
 
-## Sanity check
+## Pre reqs
+* laptop with GPU
+* Python 3.9+
+* xcode (if on a Mac)
+* git
+	* configure user.name and user.email
+* VS Code (recommended) with YAML plug in from Red Hat
+* yamllint (pip install)
+* Public github (github.com) account
+	* [SSH Key set up for github.com](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+* [Install InstructLab](https://ibm.ent.box.com/folder/271730051148?s=hywj3rlwbiv2nqe32qgw4v3app7wc1wo) [README](https://github.com/instructlab/instructlab/blob/main/README.md) and verify it is installed correctly with `ilab` command
 
-When you open up `continue` inside of VSCode it should look something like:
-![](https://docs.continue.dev/assets/images/understand-ca0edc3d06922dd4a95e31fa06f999ec.gif)
-
-Before we go any farther, write in "Who is batman?" to verify that `ollama`,
-VSCcode, and `continue` are all working correctly.
-
-If you would like to go deeper with continue, take a look [here]( https://docs.continue.dev/how-to-use-continue) for
-a more in-depth getting started guide.
-
-Now that we have our local AI co-pilot with us, lets start using it. Now these
-next examples are going to be focused on `python` but there is nothing stopping
-you from doing this exact same process with `go`, `javascript`, `rust`, or the
-like. Part of learning about leveraging this technology is finding the boarders
-of its skill sets, and hopefully walking through this you'll understand that
-this technology is there to support you, not _do_ your work.
-
-Now, lets open up VSCode and have it look something like the following:
-![batman](../images/whoisbatman.png)
-
-## Building out `main.py`
-
-Now create a new file, and put it in a new directory. Normally it's `ctrl-n` or `command-n` call it
-`main.py`.
-
-This is where you should probably "clear" the context window, so either use `ctrl-l` or `command-l` so
-your context is clear like the example here:
-![clear](../images/clearscreen.png)
-
-Now use the `command-i` or `ctrl-i` to open up the `generate code` command palette, and write in:
+## Set up InstructLab and Create Knowledge
+### Validate install complete
+* review how to update instructlab `https://github.com/instructlab/instructlab/blob/main/README.md#-upgrade-instructlab-to-latest-version`
 ```
-write me out conways game of life using pygame
+pip install instructlab --upgrade
 ```
-
-Now granite-code should start giving you a good suggestion here, it should look something like:
-![gameoflife_v1](../images/gameoflife_v1.png)
-
-!!! note
-    It won't be the same will it? That is expected, but you should notice that it's _close_.
-
-
-## Reading AI generated code
-
-Now what have you noticed here? Try to run it...does it work? Wait why are there errors in this code?
-
-This is an important lesson for using _any_ AI co-pilot code assistants. They can give you the "lions share"
-of what you need, but it won' get you across the finish line. It gives you that "second pair of eyes" and provides
-something to work with, but not everything you need.
-
-Don't believe me? Bring up the terminal and attempt to run this code after you accepting it.
-
-![nope doesn't do anything](../images/nowork.png)
-
-Well that isn't good is it? Yours may be different code, or maybe it does work, but at least in this
-example we need to to get it fixed.
-
-## First pass at debugging
-
-I'll run the following commands to build up an virtual environment, and install some modules, lets
-see how far we get.
-
-```bash
-python3.11 -m venv venv
+	* [README](https://github.com/instructlab/instructlab/blob/main/README.md)
+	* might need to rerun `ilab init`
+	* M1/M2/M3 Mac instructions
+```
 source venv/bin/activate
-workshop-python-ai pip install pygame
+(venv) $ pip cache remove llama_cpp_python
+(venv) $ pip install git+https://github.com/instructlab/instructlab.git@stable -C cmake.args="-DLLAMA_METAL=on"
 ```
-
-Well better, I think, but nothing still happens. So even noticing the `import pygame` tells me I need to
-debug farther. There's a few paths here, personally I'm going to take this code, and clean it up a bit
-so it's more readable.
-
-## Cleaning up the AI generated code
-
-Cleaning up the code. Now everything is smashed together, it's hard to read the logic here, so first
-thing first, going to break up the code and add a `def main` function so I know what the entry point is.
-
-On my version, I had a `tkinter` section, I decided to put the main game loop there:
-```python
-if __name__ == '__main__':
-    root = tkinter.Tk()
-    game_of_life(tkinter.Canvas(root))
-    root.mainloop()
+	* see README link above for other hardware instructions
+* verify `ilab` is installed correctly
 ```
-
-But above it, it seems there's a red squiggly! Remember all I added was some line breaks to for readability,
-so another problem this AI gave me, so I need to resolve this too.
-
-![broken main](../images/broken_main.png)
-
-For me, all I had to do was remove those extra spaces, but I'd be curious to know what your AI gave you...
-
-## Second pass at debugging
-
-Now that I've clean it up, and it seems I had to do some importing:
-
-```python
-import tkinter
-import time
+ilab
 ```
-I can at least run my application now:
-![tk nothing](../images/tk_nothing.png)
-
-But that doesn't work right?! OK, lets start debugging more. This next step is to leverage Granite-Code to
-tell me whats going on with the different functions. Go ahead and highlight any _one_ of them and run:
-`ctrl-L` or `command-L` to add it to the context window and ask granite-coder something like
-
+* Activate the virtual environment for python if you haven’t done so already
+	* change directory to the subdirectory where you installed InstructLab
+	* for Mac
 ```
-what does this function do?
+source venv/bin/activate
 ```
-
-![explain code](../images/explain_code.png)
-
-Pretty good right? It helped me understand what is actually happening with this and I do it with each
-function so i get a better understanding of what the program is doing.
-
-Go ahead and walk through your version, see the logic, and who knows maybe it'll highlight why yours
-isn't working yet, or not, the next step will help you even more!
-
-## Automagicly creating tests!
-
-One of the most powerful/helping stream line your workflow as a developer is writing good tests
-around your code. It's a safety blanket to help make sure your custom code has a way to check for
-any adverse changes in a day, week, month, year down the line. Most people hate writing tests,
-turns out Granite-Code can do it for you!
-
-That function you recently put in the context window? How about you ask it this:
-
-```text
-write a pytest test for this function
+	* for Windows
 ```
+# In cmd.exe
+venv\Scripts\activate.bat
+# In PowerShell
+venv\Scripts\Activate.ps1
+```
+* Helpful hints:
+	* shouldn’t have to redownload the model unless it has been updated
+	* **EVERY** time you start working with `ilab`, be sure you execute `source venv/bin/activate` (if Mac) or `venv\Scripts\activate.bat` (if Windows) from where you installed `instructlab` first
 
-Now I got a good framework for a test here:
-![lazy pytest](../images/pytest_test.png)
-
-Notice that it only knew about what is in the context, so yep I'll need to add `pip install pytest` to
-my project. I'll also need to create a new test file and integrate `pytest` into my project. But
-this highlights you not blindly taking from the AI, you need to put it _in_ your system.
-
-Admittedly, if you have trouble building out tests though this is insanely powerful, and your
-futureself and team mates will be happy you've built these in.
-
-Finally there are two other things we should mention before heading over to the next Lab. First,
-hopefully you've gotten your Game of Life working, if not, a lot of us are Python developers,
-raise your hand and one of us maybe able to come help you out.
-
-## Automagicly commenting your code
-
-Last but not least, there is a great auto comment code option that we'd be remiss not to mention,
-take a look at the next screen shot:
-
-![comment_code](../images/comment_code.png)
-
-It does some amazing work for you code, and really finally, take a look at [this video](https://www.youtube.com/watch?v=V3Yq6w9QaxI) if you want a quick video of other neat https://continue.dev functions we didn't go over.
-
-On to the next lab!
-
-<img src="https://count.asgharlabs.io/count?p=/lab2_opensource_ai_page>
+### Fork instructlab/taxonomy to your repo - ie ljmwaugh/taxonomy
+* Fork the instuctlab/taxonomy repo to your local taxonomy repo
+	* Open `https://github.com/instructlab/taxonomy` in your browser
+	* Click on Fork
+			![](.data/md-images/09778739-aecf-4e20-949f-3399c08114b4.webp#$width=60p$)
+	* Validate the Owner to Fork to and click `Create fork` button
+		![](.data/md-images/c146a7a2-0ed1-4f78-a2a7-b8c1b6f5e3c4.webp#$width=60p$)
+	* Open the new fork of the repository in browser
+* Create a local clone of the fork
+	* Click on Green `Code` button. Be sure SSH tab is selected, and click on copy icon.
+		![](.data/md-images/b194382e-8c7b-4b31-ba10-ef4894c141b1.webp#$width=60p$)
+	* Open a terminal window or command prompt
+	* Change directory to where your github repos reside
+	* Issue the following command `git clone ` then paste the SSH link you copied from Green `Code` button
+* Additional helpful links
+	* [CONTRIBUTING](https://github.com/instructlab/community/blob/main/CONTRIBUTING.md#getting-started-with-contribution)
+	* [github-workflow](https://github.com/kubernetes/community/blob/master/contributors/guide/github-workflow.md)
+	* [helpful git commands](https://training.github.com/downloads/github-git-cheat-sheet.pdf)
+### Configure ilab to point to the forked taxonomy repo
+```
+ilab init
+```
+* Enter the `Path to taxonomy repo` on your local harddrive.
+![](.data/md-images/271c60b9-fe23-4c3a-89e8-cbe2df0d774b.webp#$width=80p$)
+* Press the Return or Enter key to use the default path for model.  You can specify the granite model instead of the merlinite model by entering `models/granite-7b-lab-Q4_K_M.gguf`
+![](.data/md-images/859dbeb1-cbb3-4221-809c-9b2d8779e4c6.webp#$width=85p$)
+* Should see this message
+![](.data/md-images/4d731826-15ab-4faf-9915-1889bb124dfb.webp#$width=80p$)
+* `config.yaml` stores the configuration information you just supplied.  This file can be edited if needed.  You can also recreate the file by running `ilab init` again.
+### Download the model
+```
+ilab download
+```
+* The ilab download command downloads the merlinite model from the HuggingFace instructlab organization that we will use for this workshop.
+* To download the granite model enter `ilab download --repository instructlab/granite-7b-lab-GGUF --filename=granite-7b-lab-Q4_K_M.gguf`
+### Serve the model
+```
+ilab serve
+```
+* This command will start the server process for the merlinite model.
+* To start the server process for the granite model enter `ilab serve --model-path ./models/granite-7b-lab-Q4_K_M.gguf`
+### Chat with the model
+* Open a new terminal window
+	* `cd` to the subdirectory where you installed instructlab
+	* `source venv/bin/activate` to activate the Python virtual environment
+		* or `venv\Scripts\activate.bat`if Windows
+	* `ilab chat` to start asking questions
+		* `/q` to exit the chat when you’re done experimenting
+	* To use the granite model instead of the merlinite model, enter `ilab chat -m ./models/granite-7b-lab-Q4_K_M.gguf`
+* Ask questions of the model to determine where there are gaps and identify what knowledge you want to add
+	* Ideas to consider:
+		* Information that is new as of 2023 or 2024
+		* It needs to be information that can be found in Wikipedia, wikisource.org, openstack docs, open organization.org, open practice, the scrum guide.org.  The InstructLab github pages should be updated with this new information shortly.
+		* `.gov` websites are not blanket approved because individual pages have different licenses
+### Create repo to hold knowledge markdown files - ie ljmwaugh/instructlab_knowledge
+* Create personal github repository to hold knowledge markdown files :{OR use knowledge already created here:(style="background-color:#ffffa0ff"):}: `https://github.com/juliadenham/Summit_knowledge`
+	* Navigate to `https://github.com/<yourgitname>?tab=repositories`.  Mine is `https://github.com/ljmwaugh?tab=repositories`
+			 ![](.data/md-images/c0a8275a-a8c8-4d7d-98b3-a193d59b9b75.webp#$width=60p$)
+	* Create a new repo by clicking on the green `New` button
+	* On the `Create a new repository` screen, enter the `Respository name` in the field that you want to create.  Mine is instructlab\_knowledge.
+			![](.data/md-images/bcf50c00-a090-4aad-ad4c-b43bfe5247b1.webp#$width=60p$)
+	* Fill in the rest of the fields as you want.  I left mine `Public` and added a README file but those are optional.
+	* Click on green `Create respository` button at the bottom of the page.
+![](.data/md-images/c95bb5d1-8bad-499a-a69f-15a1e5a66a1b.webp#$width=60p$)
+	* On the next screen we will copy the `SSH` link for cloning.  Look for Quick setup in the middle of the page, click on `SSH` and copy the link displayed.  Mine is `git@github.com:ljmwaugh/test.git`
+			![](.data/md-images/265ffb13-a552-40d2-a16f-e075593b94da.webp#$width=60p$)
+	* Open a terminal window, different from where you installed instructlab, navigate to where your github repositories are cloned and enter `git clone <ssh link>`.  Respond to any prompts for passcodes as necessary.  If you get an error about authentication, make sure you have completed the steps above for SSH key setup.
+* Create a markdown file with the “source” knowledge
+	* For now, copy information from wikipedia for the markdown file
+* Add, commit, and push the markdown file to the github repo you created for the knowledge files.
+* Navigate to the github repo (for the markdown file) in a browser.
+	* The `repo`, `commit`, and `patterns` in the qna.yaml are all about the **markdown file** and NOT the qna.yaml
+	* the SHA commit is the commit of the markdown file, not the qna.yaml
+### Create knowledge in forked taxonomy repo - ljmwaugh/taxonomy
+* Create a branch in your forked taxonomy repo for this knowledge submission.
+	* Follow directions here [Creating and deleting branches within your repository - GitHub Docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository) or [How to Create and Delete Branches in Visual Studio Code | Jason N. Gaylord](https://www.jasongaylord.com/blog/2020/07/08/create-delete-branches-using-visual-studio-code) or [how-to-create-a-new-branch-with-git-using-vs-code-1in0](https://dev.to/jasurkurbanov/how-to-create-a-new-branch-with-git-using-vs-code-1in0).  :{If you are using VS Code, I recommend creating the branch with VS Code.:(style="background-color:#ffffa0ff"):}:
+* In VS Code (or other editor), navigate to the subdirectory that will contain the knowledge.  You may have to create subdirectories as appropriate for the new knowledge.  :{Be sure you are on the correct branch inside the editor.:(style="background-color:#ffffa0ff"):}:
+* Create `attribution.txt` file.  I recommend copying an existing attribution file and editing it.
+	* `Link to work:` and `Revision:` point to the Wikipedia page that you copied the information in the Markdown file from
+	* `Link to work:` is the standard Wikipedia URL
+	* To get the URL for `Revision:`, Click on `View history` on the right side of the page, then click on the date/time link at the top of the list of revisions.  Then you can copy that URL for the `Revision:`.  It will look something like this `https://en.wikipedia.org/w/index.php?title=Tabby_cat&oldid=1224796569`
+	* Copy the other information from an existing attribution.txt file.
+* Writing your first knowledge contribution.
+	* Create `qna.yaml` in the same subdirectory with the `attribution.txt` file.  I would copy an existing `qna.yaml` to be sure the format is correct.
+	* Modify the
+	* YAML hints
+		* `task_description` is important
+		* name the `domain` like a chapter in a text book - like tabby cats vs animals
+		* be sure to include `version: 2`
+		* `repo` your repo with the knowledge markdown files that you created above.  This can be the same repo or a separate repo.
+		* `commit` the SHA commit in your repo with your knowledge markdown files.
+		* no trailing blanks
+		* one blank line at the end of the file
+		* only one space after `:`
+		* multiline indicated by `|`
+* execute `git submodule update --init` in the subdirectory where you forked taxonomy (in your repo). [Additonal information](https://github.com/instructlab/instructlab/discussions/1044) and [more information](https://github.com/instructlab/taxonomy/discussions/776).
+* Validate `qna.yaml` using `./.github/scripts/check-yaml.py <path>/qna.yaml`
+	* see common YAML issues above
+* `ilab diff`to validate that everything is set up correctly and the qna.yaml and knowledge markdown file are found
+* `ilab generate --num-instructions 10` generate synthetic data used to train the model, set it to 10 instead of generating 100
+### Commit qna.yaml and attribution.txt
+* `cd` to the `taxonomy` repo
+* `git status` to check status.  You should see `qna.yaml` and `attribution.txt` need to be added.
+* There are two ways you can do this.  You can use VS Code Source Control to add the files or you can do it on the command line/terminal.
+	* `git add .` will add all of the files listed by `git status`
+	* In VS Code, you can click on the `+` beside each file to add it.
+* Next you need to **commit** the files you just added with a **sign off** trailer
+	* `git commit -sm ‘<commit message>` will work from the command line.  Actually, this is the simplest way in my opinion.
+	* In VS Code, press Shift+CMD+P to Show and Run commands
+		* enter `git commit` and then select `Git: Commit (Signed Off)`
+		* select `taxonomy main+`
+		* enter a COMMIT_EDITMSG then CMD+s to save the file
+		* click the X on the tab to close it
+* Now we are ready to Sync Changes.
+	* `git push` followed by `git pull` will work from the command line
+	* In VS Code, click the `Sync Changes` button
+### Create PR
+* In a browser, navigate to `https://github.com/instructlab/taxonomy`
+* Click on `Pull requests`
+* Click on `New pull request` button
+* Click on `compare across forks` link
+* Change the dropdown that says `head repository: instructlab/taxonomy` to the fork that you created.  In my case that is `ljmwaugh/taxonomy`.  Change the branch in your fork if needed.
+* Click on `Create pull request` button
+* Fill out the PR template
+* Click `Compare & pull request`

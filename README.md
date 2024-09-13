@@ -1,8 +1,8 @@
-# Open Source AI Workshop
+# InstructLab Workshop
 
-This is the Open Source AI Workshop source code.
+This is the InstructLab Workshop source code.
 
-<https://ibm.github.io/opensource-ai-workshop>
+<***>
 
 Create a new repo based off this template, and use the following folders as a guide:
 

@@ -1,26 +1,15 @@
 # Pre-work
 
-These are the suggested applications and general installation notes for this workshop.
+This section will give you InstrucLab background as well as guide you through the neccessary prerequisites and installations
 
-## Ollama
+## Background
 
-#### Mac installation steps
+XXXXXXXXXXXX
 
-Open up a terminal, and install [homebrew](https://brew.sh/).
+## InstructLab Installation
 
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-After the installation is complete, install [ollama](https://ollama.com) via `brew`.
-
-```bash
-brew install ollama
-```
-
-### Windows installation steps
-
-Install ollama via the website [here](https://ollama.com/download/windows).
+Expand from
+https://github.com/instructlab/instructlab/blob/main/README.md
 
 ## Visual Studio Code
 
@@ -54,8 +43,7 @@ python --version
 Python 3.12.4
 ```
 
-Please confirm that your `python --version` is at least `3.11+` for the best experiance.
+Please confirm that your `python --version` is at least `3.11+` for the best experience.
 
-With this you should have the applications you need, let's start the workshop!
+With this you should have the knowledge applications you need, let's start the workshop!
 
-<img src="https://count.asgharlabs.io/count?p=/prework_opensource_ai_page>
