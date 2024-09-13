@@ -13,7 +13,7 @@ it to have.
     Granite-Code we will update this tutorial.
 
 
-## Requirements3
+## Requirements
 
 - **🍎 Apple M1/M2/M3 Mac or 🐧 Linux system** (tested on Fedora).
 - C++ compiler
