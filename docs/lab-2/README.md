@@ -50,7 +50,7 @@ venv\Scripts\Activate.ps1
 	* shouldn’t have to redownload the model unless it has been updated
 	* **EVERY** time you start working with `ilab`, be sure you execute `source venv/bin/activate` (if Mac) or `venv\Scripts\activate.bat` (if Windows) from where you installed `instructlab` first
 
-### Fork instructlab/taxonomy to your repo - ie ljmwaugh/taxonomy
+### Fork instructlab/taxonomy to your repo - ie github_username/taxonomy
 * Fork the instuctlab/taxonomy repo to your local taxonomy repo
 	* Open `https://github.com/instructlab/taxonomy` in your browser
 	* Click on Fork
