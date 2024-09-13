@@ -104,9 +104,9 @@ ilab serve
 		* Information that is new as of 2023 or 2024
 		* It needs to be information that can be found in Wikipedia, wikisource.org, openstack docs, open organization.org, open practice, the scrum guide.org.  The InstructLab github pages should be updated with this new information shortly.
 		* `.gov` websites are not blanket approved because individual pages have different licenses
-### Create repo to hold knowledge markdown files - ie ljmwaugh/instructlab_knowledge
+### Create repo to hold knowledge markdown files - ie github_username/instructlab_knowledge
 * Create personal github repository to hold knowledge markdown files :{OR use knowledge already created here:(style="background-color:#ffffa0ff"):}: `https://github.com/juliadenham/Summit_knowledge`
-	* Navigate to `https://github.com/<yourgitname>?tab=repositories`.  Mine is `https://github.com/ljmwaugh?tab=repositories`
+	* Navigate to `https://github.com/<yourgitname>?tab=repositories`.  Mine is `https://github.com/github_username?tab=repositories`
 			 ![](.data/md-images/c0a8275a-a8c8-4d7d-98b3-a193d59b9b75.webp#$width=60p$)
 	* Create a new repo by clicking on the green `New` button
 	* On the `Create a new repository` screen, enter the `Respository name` in the field that you want to create.  Mine is instructlab\_knowledge.
@@ -114,7 +114,7 @@ ilab serve
 	* Fill in the rest of the fields as you want.  I left mine `Public` and added a README file but those are optional.
 	* Click on green `Create respository` button at the bottom of the page.
 ![](.data/md-images/c95bb5d1-8bad-499a-a69f-15a1e5a66a1b.webp#$width=60p$)
-	* On the next screen we will copy the `SSH` link for cloning.  Look for Quick setup in the middle of the page, click on `SSH` and copy the link displayed.  Mine is `git@github.com:ljmwaugh/test.git`
+	* On the next screen we will copy the `SSH` link for cloning.  Look for Quick setup in the middle of the page, click on `SSH` and copy the link displayed.  Mine is `git@github.com:github_username/test.git`
 			![](.data/md-images/265ffb13-a552-40d2-a16f-e075593b94da.webp#$width=60p$)
 	* Open a terminal window, different from where you installed instructlab, navigate to where your github repositories are cloned and enter `git clone <ssh link>`.  Respond to any prompts for passcodes as necessary.  If you get an error about authentication, make sure you have completed the steps above for SSH key setup.
 * Create a markdown file with the “source” knowledge
@@ -123,7 +123,7 @@ ilab serve
 * Navigate to the github repo (for the markdown file) in a browser.
 	* The `repo`, `commit`, and `patterns` in the qna.yaml are all about the **markdown file** and NOT the qna.yaml
 	* the SHA commit is the commit of the markdown file, not the qna.yaml
-### Create knowledge in forked taxonomy repo - ljmwaugh/taxonomy
+### Create knowledge in forked taxonomy repo - github_username/taxonomy
 * Create a branch in your forked taxonomy repo for this knowledge submission.
 	* Follow directions here [Creating and deleting branches within your repository - GitHub Docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository) or [How to Create and Delete Branches in Visual Studio Code | Jason N. Gaylord](https://www.jasongaylord.com/blog/2020/07/08/create-delete-branches-using-visual-studio-code) or [how-to-create-a-new-branch-with-git-using-vs-code-1in0](https://dev.to/jasurkurbanov/how-to-create-a-new-branch-with-git-using-vs-code-1in0).  :{If you are using VS Code, I recommend creating the branch with VS Code.:(style="background-color:#ffffa0ff"):}:
 * In VS Code (or other editor), navigate to the subdirectory that will contain the knowledge.  You may have to create subdirectories as appropriate for the new knowledge.  :{Be sure you are on the correct branch inside the editor.:(style="background-color:#ffffa0ff"):}:
@@ -171,7 +171,7 @@ ilab serve
 * Click on `Pull requests`
 * Click on `New pull request` button
 * Click on `compare across forks` link
-* Change the dropdown that says `head repository: instructlab/taxonomy` to the fork that you created.  In my case that is `ljmwaugh/taxonomy`.  Change the branch in your fork if needed.
+* Change the dropdown that says `head repository: instructlab/taxonomy` to the fork that you created.  In my case that is `github_username/taxonomy`.  Change the branch in your fork if needed.
 * Click on `Create pull request` button
 * Fill out the PR template
 * Click `Compare & pull request`
