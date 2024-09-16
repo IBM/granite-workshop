@@ -1,6 +1,6 @@
-# Using the local AI co-pilot
+# Tuning using InstructLab CLI
 
-Lets play with our new found local AI InstructLab!
+Let's tune a local Granite Model using the InstrucLab CLI
 
 ## Pre reqs
 * laptop with GPU
