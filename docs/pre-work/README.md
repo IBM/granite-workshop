@@ -58,6 +58,11 @@ brew install --cask visual-studio-code
 
 ### Windows installation steps
 
+!!! note
+    If you are running this workshop on Windows, as of this writing it's an
+    unsupported platform. You may run into some issues, and as they say "There
+    be dragons."
+
 Install Code via the website [here](https://code.visualstudio.com/Download).
 
 ## Python

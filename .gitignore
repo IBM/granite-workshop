@@ -83,4 +83,4 @@ Session.vim
 .netrwhist
 *~
 tags
-venv
+venv*

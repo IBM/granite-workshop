@@ -1,15 +1,13 @@
 ---
-title: InstructLab Workshop
-description: Learn how to leverage InstructLab
+title: Granite Workshop
+description: Learn how to leverage the Granite Foundational Model
 logo: images/ibm-blue-background.png
 ---
 
-# Introduction
-
-## InstructLab Workshop
+# Granite Workshop
 
 Welcome to our workshop! In this workshop we'll be using the InstructLab CLI to install and run a quantized Granite model before adding our own knowledge.
-After this we will show the simplified contribution workflow throught the [InstructLab UI](https://qa.ui.instructlab.ai/)
+After this we will show the simplified contribution workflow throught the [InstructLab UI](https://qa.ui.instructlab.ai/).
 
 By the end of this workshop, you will be able to:
 * Understand what InstructLab is and its general use cases
@@ -44,4 +42,4 @@ This workshop has been tested on the following platforms:
 
 ## Credits
 
-<img src="https://count.asgharlabs.io/count?p=/main_opensource_ai_page">
+<img src="https://count.asgharlabs.io/count?p=/main_granite_workshop_page">
