@@ -28,12 +28,11 @@ The introductory page of the workshop is broken down into the following sections
 |  |  |
 | :--- | :--- |
 | [Lab 0: Pre-work](pre-work/README.md)  | Pre-work for the project |
-| [Lab 1: Installing a local AI co-pilot](lab-1/reserve.md) | |
-| [Lab 2: Building a local AI co-pilot](lab-1/README.md) | Let's set up InstructLab |
-| [Lab 3: Using the local AI co-pilot](lab-2/README.md) |Let's fine tune a model with open source software |
-| [Lab 4: Installing InstructLab for local AI Tuning](lab-3/README.md) |Let's contribute to Open Source |
-| [Lab 5: Tuning the Granite Model](lab-4/README.md) | |
-| [Lab 6: Creating a new Wikipedia Based Submission](lab-5/README.md) | |
+| [Lab 1: Installing a local AI](lab-1/README.md) | |
+| [Lab 2: Using a local AI](lab-2/README.md) | |
+| [Lab 3: Building your local AI co-pilot](lab-3/README.md)| |
+| [Lab 4: Tuning your local AI](lab-4/README.md) | |
+| [Lab 5: Using the InstructLab UI for AI Tuning](lab-5/README.md) | |
 
 ## Compatibility
 
