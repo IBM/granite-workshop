@@ -79,5 +79,35 @@ Python 3.12.4
 
 Please confirm that your `python --version` is at least `3.11+` for the best experience.
 
+
+## Ollama
+
+#### Mac installation steps
+
+##### Download via the Ollama website
+
+[Download Ollama](https://ollama.com/download/Ollama-darwin.zip) via the website.
+
+Unzip the folder, and move the Ollama app to your applications folder.
+
+##### Terminal Installation
+
+Open up a terminal, and install [homebrew](https://brew.sh/).
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+After the installation is complete, install [ollama](https://ollama.com) via `brew`.
+
+```bash
+brew install ollama
+```
+
+### Windows installation steps
+
+Install ollama via the website [here](https://ollama.com/download/windows).
+
+
 With this you should have the knowledge and applications you need, so let's start the workshop!
 

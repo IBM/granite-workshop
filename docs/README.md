@@ -10,6 +10,7 @@ Welcome to our workshop! In this workshop we'll be using the InstructLab CLI to 
 After this we will show the simplified contribution workflow throught the [InstructLab UI](https://qa.ui.instructlab.ai/).
 
 By the end of this workshop, you will be able to:
+
 * Understand what InstructLab is and its general use cases
 * Create and test your own knowledge and skill submissions locally using the CLI
 * Learn a suggested workflow on how to fine tune a model with new knowledge and skills!
@@ -18,19 +19,21 @@ By the end of this workshop, you will be able to:
 
 The introductory page of the workshop is broken down into the following sections:
 
-* [Agenda](./#agenda)
-* [Compatibility](./#compatibility)
-* [Technology Used](./#technology-used)
-* [Credits](./#credits)
+* [Agenda](#agenda)
+* [Compatibility](#compatibility)
+* [Credits](#credits)
 
 ## Agenda
 
 |  |  |
 | :--- | :--- |
-| [Lab 0: Pre-work](pre-work/README.md) | Pre-work for the project |
-| [Lab 1: Installing InstructLab for local AI Tuning](lab-1/README.md) | Let's set up InstructLab |
-| [Lab 2: Tuning using InstructLab CLI](lab-2/README.md) | Let's fine tune a model with open source software |
-| [Lab 3: Using the UI to contribute](lab-3/README.md) | Let's contribute to Open Source |
+| [Lab 0: Pre-work](pre-work/README.md)  | Pre-work for the project |
+| [Lab 1: Installing a local AI co-pilot](lab-1/reserve.md) | |
+| [Lab 2: Building a local AI co-pilot](lab-1/README.md) | Let's set up InstructLab |
+| [Lab 3: Using the local AI co-pilot](lab-2/README.md) |Let's fine tune a model with open source software |
+| [Lab 4: Installing InstructLab for local AI Tuning](lab-3/README.md) |Let's contribute to Open Source |
+| [Lab 5: Tuning the Granite Model](lab-4/README.md) | |
+| [Lab 6: Creating a new Wikipedia Based Submission](lab-5/README.md) | |
 
 ## Compatibility
 

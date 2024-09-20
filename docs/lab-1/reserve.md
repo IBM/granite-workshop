@@ -1,4 +1,4 @@
-# Building a local AI co-pilot
+# Installing a Local AI
 
 ## Overview
 
