@@ -14,11 +14,11 @@ nav:
     - About the workshop: README.md
   - Workshop:
     - Lab 0. Pre-work: pre-work/README.md
-    - Lab 1. Installing a local AI: lab-1/reserve.md
-    - Lab 2. Using a local AI: lab-2/using.md
-    - Lab 3. Building your local AI co-pilot: lab-1/README.md
-    - Lab 4. Tuning your local AI: lab-2/README.md
-    - Lab 5. Using the  InstructLab UI for AI Tuning: lab-3/README.md
+    - Lab 1. Installing a local AI: lab-1/README.md
+    - Lab 2. Using a local AI: lab-2/README.md
+    - Lab 3. Building your local AI co-pilot: lab-3/README.md
+    - Lab 4. Tuning your local AI: lab-4/README.md
+    - Lab 5. Using the  InstructLab UI for AI Tuning: lab-5/README.md
   - References:
     - Additional Resources: resources/RESOURCES.md
     - MkDocs Cheatsheet: resources/MKDOCS.md

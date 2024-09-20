@@ -1,175 +1,168 @@
-# Tuning a Granite Model using the InstructLab CLI
+# Using a local AI
 
-Now that you've set up InstructLab, let's get tuning the Granite Model.
+Lets play with our new found local AI Open Source AI!
 
-## Sanity check
+## Sanity checks
 
-First thing you should do is verify you can talk to the Granite model, go ahead and run
-the following commands to verify you can.
+When you open up `continue` inside of VSCode it should look something like:
+![](https://docs.continue.dev/assets/images/understand-ca0edc3d06922dd4a95e31fa06f999ec.gif)
+
+Before we go any farther, write in "Who is batman?" to verify that `ollama`,
+VSCode, and `continue` are all working correctly.
+
+!!! troubleshooting
+    If Continue is taking a long time to respond, restart Visual Studio Code. If that doesn't resolve your issue, restart Ollama.
+
+If you would like to go deeper with continue, take a look at the [official Continue.dev how-to guide]( https://docs.continue.dev/how-to-use-continue).
+
+Now that we have our local AI co-pilot with us, let's start using it. Now these
+next examples are going to be focused on `python` but there is nothing stopping
+you from doing this exact same process with `go`, `javascript`, `rust`, or the
+like. Part of learning about leveraging this technology is finding the boarders
+of its skill sets, and hopefully walking through this you'll understand that
+this technology is there to support you, not _do_ your work.
+
+Now, lets open up VSCode and have it look something like the following:
+![batman](../images/whoisbatman.png)
+
+## Building out `main.py`
+
+Now create a new file, and put it in a new directory. Normally it's `ctrl-n` or `command-n` call it
+`main.py`.
+
+This is where you should probably "clear" the context window, so either use `ctrl-l` or `command-l` so
+your context is clear like the example here:
+![clear](../images/clearscreen.png)
+
+Now use the `command-i` or `ctrl-i` to open up the `generate code` command palette, and write in:
+```
+write me out conways game of life using pygame
+```
+
+Now granite-code should start giving you a good suggestion here, it should look something like:
+![gameoflife_v1](../images/gameoflife_v1.png)
+
+!!! note
+    It won't be the same will it? That is expected, but you should notice that it's _close_.
+
+
+## Reading AI generated code
+
+Now what have you noticed here? Try to run it...does it work? Wait, why are there errors in this code?
+
+This is an important lesson for using _any_ AI co-pilot code assistants. They can give you the "lions share"
+of what you need, but it won't get you across the finish line. It gives you that "second pair of eyes" and provides
+something to work with, but not everything you need.
+
+Don't believe me? Bring up the terminal and attempt to run this code after you accepting it.
+
+![nope doesn't do anything](../images/nowork.png)
+
+Well that isn't good is it? Yours may be different code, or maybe it does work, but at least in this
+example we need to to get it fixed.
+
+## First pass at debugging
+
+I'll run the following commands to build up an virtual environment, and install some modules, lets
+see how far we get.
 
 ```bash
-cd instructlab
+python3.11 -m venv venv
 source venv/bin/activate
-ilab model chat
-/q
+(venv) pip install pygame
 ```
 
-## Prepare to train your model
+Well better, I think, but nothing still happens. So even noticing the `import pygame` tells me I need to
+debug farther. There's a few paths here, personally I'm going to take this code, and clean it up a bit
+so it's more readable.
+
+## Cleaning up the AI generated code
 
 !!! note
-    If you are running CPU only, or don't have a modern GPU or a Apple M1/M2/M3 this will take a long time. We strongly suggest finding someone with a GPU enabled machine to continue with this workshop. If anything the instructor or teaching assistants should have a laptop that can be projected on the main screen.
+    You can try using the built-in autocomplete and code assistant functions to generate any missing code. In our example, we're missing a "main" entry point to the script. Try hitting `cmd/ctrl + I` again, and typing in something like: "write a main function for my game that plays twenty rounds of Conway's game of life using the `board()` function". What happens?
 
-1. Pull down an example `qna.yaml`. But wait what is a `qna.yaml`? There's a few things you should know before going any further.
+Cleaning up the code. Now everything is smashed together, it's hard to read the logic here, so first
+thing first, going to break up the code and add a `def main` function so I know what the entry point is.
 
-Knowledge is based more on answering questions that involve facts, data, or references.
-
-Knowledge in the taxonomy tree consists of a few more elements than skills:
-
-- Each knowledge node in the tree has a `qna.yaml`, similar to the format of the `qna.yaml` for skills.
-- ⭐ Knowledge submissions require you to create a Git repository, can be with GitHub, that contains the markdown files of your knowledge contributions. These contributions in your repository must use the markdown (.md) format.
-- The `qna.yaml` includes parameters that contain information from your repository.
-
-!!! tip
-    Guidelines for Knowledge contributions
-
-    - Submit the most up-to-date version of the document
-    - All submissions must be text, images will be ignored
-    - Do not use tables in your markdown freeform contribution
-
-Format of the `qna.yaml`:
-
-- `version`: The chache verion of the qna.yaml file, this is the format of the file used for SDG. The value must be the number 3.
-- `created_by`: Your GitHub username.
-- `domain`: Specify the category of the knowledge.
-- `seed_examples`: A collection of key/value entries.
-  - `context`: A chunk of information from the knowledge document. Each `qna.yaml` needs five `context` blocks and has a maximum word count of 500 words.
-  - `questions_and_answers`: The parameter that holds your questions and answers
-    - `question`: Specify a question for the model. Each `qna.yaml` file needs at least three question and answer pairs per `context` chunk with a maximum word count of 250 words.
-    - `answer`: Specify the desired answer from the model. Each `qna.yaml` file needs at least three question and answer pairs per `context` chunk with a maximum word count of 250 words.
-- `document_outline`: Describe an overview of the document your submitting.
-- `document`: The source of your knowledge contribution.
-  - `repo`: The URL to your repository that holds your knowledge markdown files.
-  - `commit`: The SHA of the commit in your repository with your knowledge markdown files.
-  - `patterns`: A list of glob patterns specifying the markdown files in your repository. Any glob pattern that starts with `*`, such as `*.md`, must be quoted due to YAML rules. For example, `"*.md"`.
-
-```bash
-mkdir instructlab
-git clone git@github.com:erictherobot/wikipedia-markdown-generator.git
-```
-The first thing we need to do is create a new directory to have a clean place to work and pull down some software. Most of the time, the easiest thing to update in the model is the Wikipedia entry, so luckily, `erictherobot` has written a helpful tool to pull down markdown versions of the articles for us.
-
-```bash
-git clone git@github.com:<USERNAME>/instructlab-knowledge-docs.git
+On my version, I had a `tkinter` section, I decided to put the main game loop there:
+```python
+if __name__ == '__main__':
+    root = tkinter.Tk()
+    game_of_life(tkinter.Canvas(root))
+    root.mainloop()
 ```
 
-After this, clone down your instructlab knowledge docs repository. It can be named whatever you'd like, but if you use our https://ui.instructlab.ai, you'll notice you already have `instructlab-knowledge-docs`.
+But above it, it seems there's a red squiggly! Remember all I added was some line breaks to for readability,
+so another problem this AI gave me, so I need to resolve this too.
 
-```bash
-cd wikipedia-markdown-generator
-python3.11 -m venv venv-md-gen
-source venv-md-gen/bin/activate
-pip install -r requirements
-python3 wiki-to-md.py Texas_Longhorns_football
+![broken main](../images/broken_main.png)
+
+For me, all I had to do was remove those extra spaces, but I'd be curious to know what your AI gave you...
+
+## Second pass at debugging
+
+Now that I've clean it up, and it seems I had to do some importing:
+
+```python
+import tkinter
+import time
 ```
-Next, we need to build a Python virtual environment and install the dependencies to get it to work. These commands cd into the directory, create the virtual environment with python3.11 (you may need to change the version of Python on your machine), activate the virtual environment, and then do the pip install the dependencies.
-You'll notice the `Texas_Longhorns_football` there, a Wikipedia article I wanted to pull down and create the `qna.yaml` against. You should choose whatever new knowledge you want to do here.
+I can at least run my application now:
+![tk nothing](../images/tk_nothing.png)
 
-```bash
-cp md_output/Texas_Longhorns_football.md ../../instructlab-knowledge-docs/
-cd ../../instructlab-knowledge-docs
-git add .
-git commit -m "added markdown doc"
-git push origin main
-cd ..
-```
-
-Next, we go ahead and copy the markdown into the knowledge repository, and commit it to our repository and push it up to GitHub.
-
-```
-git clone git@github.com/instructlab/taxonomy
-cd taxonomy
-```
-
-Next we pull down the upstream public taxonomy directory, and `cd` into that directory.
-
-```bash
-mkdir -p arts/sports/american_football/college/university_of_texas/
-```
-This next step is a "best effort" for you. As the taxonomy grows, there will be some obvious choices, but if you select a tree that hasn't been flushed out yet, you'll have to do your best to think about where you'd find the `qna.yaml`. In this case, the Dewey Decimal System says sports should be under arts; this is American Football, college level with the University of Texas. Also, notice the underscores for the spaces; this is important.
-
-```bash
-wget https://raw.githubusercontent.com/instructlab/taxonomy/main/docs/template_qna.yaml
-mv template_qna.yaml sports/american_football/college/university_of_texas/qna.yaml
-```
-Finally, you can pull down the `template_qna.yaml` and fill it out for the needed questions and answers. Be sure to put the context at a maximum of about 500 Tokens and questions and answers around 250 Tokens.
+But that doesn't work right?! OK, lets start debugging more. This next step is to leverage Granite-Code to
+tell me whats going on with the different functions. Go ahead and highlight any _one_ of them and run:
+`ctrl-L` or `command-L` to add it to the context window and ask granite-coder something like
 
 ```
-vim sports/american_football/college/university_of_texas/qna.yaml
+what does this function do?
 ```
 
-## Generating synthetic data
+![explain code](../images/explain_code.png)
 
-After you've built a good knowledge submission like above, the `qna.yaml`, the `attribution.txt` and
-finally the hosted `.md` file, you need to tell the teacher model to build questions around
-your seeded ones. Lets do that now.
+Pretty good right? It helped me understand what is actually happening with this and I do it with each
+function so I get a better understanding of what the program is doing.
 
-1. If you haven't yet, you'll need to pull down the default teacher model, this is done with this command:
+Go ahead and walk through your version, see the logic, and who knows maybe it'll highlight why yours
+isn't working yet, or not, the next step will help you even more!
 
-```bash
-ilab model download
+## Automagicly creating tests!
+
+One of the most powerful/helping stream line your workflow as a developer is writing good tests
+around your code. It's a safety blanket to help make sure your custom code has a way to check for
+any adverse changes in a day, week, month, year down the line. Most people hate writing tests,
+turns out Granite-Code can do it for you!
+
+That function you recently put in the context window? How about you ask it this:
+
+```text
+write a pytest test for this function
 ```
 
-Next sanity check the merlinite model, via the following command:
+Now I got a good framework for a test here:
+![lazy pytest](../images/pytest_test.png)
 
-```bash
-ilab serve --model-path models/merlinite-7b-lab-Q4_K_M.gguf
+Notice that it only knew about what is in the context, so yep I'll need to add `pip install pytest` to
+my project. I'll also need to create a new test file and integrate `pytest` into my project. But
+this highlights you not blindly taking from the AI, you need to put it _in_ your system.
 
-# in another terminal
-ilab model chat
-```
-After the model is working as expected, ie running "who is batman?" close out the `ilab serve` and `ilab model chat`.
+Admittedly, if you have trouble building out tests though this is insanely powerful, and your
+futureself and team mates will be happy you've built these in.
 
-2. Next we need to generate the data, this is done with the following command:
+Finally there are two other things we should mention before heading over to the next Lab. First,
+hopefully you've gotten your Game of Life working, if not, a lot of us are Python developers,
+raise your hand and one of us may be able to come help you out.
 
-```bash
-ilab data generate
-```
+## Automagically commenting your code
 
-This can take some time, take note of the time in the right hand corner, this is building 1000 questions off of your initial 15.
+Last but not least, there is a great auto comment code option that we'd be remiss not to mention,
+take a look at the next screen shot:
 
-3. After this is complete, now we'll need to train the actual model. If this isn't a Mac M3, this will take **at least an hour**, so
-hopefully you can take a lunch break or something while this is running.
+![comment_code](../images/comment_code.png)
 
-```bash
-ilab model train --model-dir instructlab/granite-7b-lab --tokenizer-dir models/granite-7b-lab --model-name instructlab/granite-7b-lab
-```
+It does some amazing work for you code, and really finally, take a look at [this video](https://www.youtube.com/watch?v=V3Yq6w9QaxI) if you want a quick video of other neat https://continue.dev functions we didn't go over.
 
-This takes the granite model, leverages the tokenized version of it, and runs the SDG from the `generate` command against it.
+On to the next lab!
 
-4. When this is completed, you'll need to test this model, which is the following command:
-```bash
-ilab model test --model-dir instructlab-granite-7b-lab-mlx-q
-```
+<img src="https://count.asgharlabs.io/count?p=/lab2_granite_workshop_page>
 
-5. Now to run the command on the Mac M3, or Apple hardware you'll need to convert it to a `gguf`, that is this next command.
-
-!!! note
-    You won't need to do this if you are running on Linux (or maybe Windows remember that's unsupported at the moment)
-
-```bash
-ilab model convert --model-dir instructlab-granite-7b-lab-mlx-q
-```
-
-6. Finally run the new model with `ilab model serve`.
-
-```bash
-ilab model serve --model-path instructlab-granite-7b-lab-trained/instructlab-granite-7b-lab-Q4_K_M.gguf
-```
-
-Success! You should notice a difference in the knowledge from what you've trained. If you haven't or something isn't working as expected please understand
-that the way [quantization](https://huggingface.co/docs/optimum/en/concept_guides/quantization#) happens to run on your laptop sometimes causes the model to
-not know what you trained it. We have some evidence that 1 out of 5 models trained retains your submissions when running on your local laptop. Don't fret
-though your submission is great for the upstream model, and extremely valuable to the project.
-
-When the full run from the upstream happens, the PR you submit with the new (or corrected) knowledge will be "baked in" better then the quantization
-method you use here, which will give much higher percentage of retrieval.

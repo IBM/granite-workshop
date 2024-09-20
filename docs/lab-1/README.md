@@ -1,197 +1,91 @@
-# Installing InstructLab for Local AI Tuning
+# Installing a Local AI
 
-Now that we have a working VSCode instance working with the granite model, lets talk about more
-things you can do with an InstructLab system. This is where the [InstructLab](https://instructlab.ai/)
-project comes into play.
+## Overview
 
-Now that we've used the foundation model from upstream, lets add some knowledge to our model that we want
-it to have.
+Success! We're ready to start with the first steps on your AI journey with us today.
+With this first lab, we'll be taking almost exact copy of [this blogpost](https://developer.ibm.com/tutorials/awb-local-ai-copilot-ibm-granite-code-ollama-continue/)
+and expanding on it for this time together.
 
-!!! note
-    As of this writing (and we haven't updated it so it's still true) this **Does NOT** work with Granite-Code,
-    but instead the core Granite model. When this note is removed and we have a `qna.yaml` like way to train
-    Granite-Code we will update this tutorial.
+In this tutorial, I will show how to use a collection of open-source components to run a feature-rich developer co-pilot in Visual Studio Code while meeting data privacy, licensing, and cost challenges that are common to enterprise users. The setup is powered by local large language models (LLMs) with IBM's open-source LLM family, Granite Code. All components run on a developer's workstation and have business-friendly licensing.
 
+There are three main barriers to adopting these tools in an enterprise setting:
 
-## Requirements
+- Data Privacy: Many corporations have privacy regulations that prohibit sending internal code or data to third party services.
+- Generated Material Licensing: Many models, even those with permissive usage licenses, do not disclose their training data and therefore may produce output that is derived from training material with licensing restrictions.
+- Cost: Many of these tools are paid solutions which require investment by the organization. For larger organizations, this would often include paid support and maintenance contracts which can be extremely costly and slow to negotiate.
 
-- **🍎 Apple M1/M2/M3 Mac or 🐧 Linux system** (tested on Fedora).
-- C++ compiler
-- Python 3.10 or Python 3.11
-- Approximately 60GB disk space (entire process)
+## Fetching the Granite Models
 
-!!! note
-    When installing the `ilab` CLI on macOS, you may have to run the `xcode-select --install` command, installing the required packages previously listed.
+First what is Granite? According to section 2 of this paper published by IBM Research titled, "[Granite Code Models: A Family of Open Foundation Models for Code Intelligence][paper],", the IBM Granite Code models meticulously curated their training data to ensure all training code carried enterprise-friendly licenses and all text did not contain any hate, abuse, or profanity.
 
-!!! warning
-    If you are running on Windows, you should use WSL2 for this, but it _is unsupported_ but we will do our best to get you success if you run into any problems.
+Granite Code comes in a wide range of sizes to fit your workstation's available resources. Generally, the bigger the model, the better the results, but the more resources it will require and the slower it'll be. I chose the 20b option as my starting point for chat and the 8b option for code generation. Ollama offers a convenient pull feature to download models:
 
-## Installing `ilab`
-
-Create a new directory called `instructlab` to store the files the `ilab` CLI needs when running and `cd` into the directory by running the following command:
-
-```shell
-mkdir instructlab
-cd instructlab
-```
-
-See [the GPU acceleration documentation](https://github.com/instructlab/instructlab/blob/main/docs/gpu-acceleration.md) for how to
-to enable hardware acceleration for interaction and training on AMD ROCm,
-Apple Metal Performance Shaders (MPS), and Nvidia CUDA.
-
-### Install using PyTorch without CUDA bindings and no GPU acceleration
-
-```shell
-python3 -m venv --upgrade-deps venv
-source venv/bin/activate
-pip cache remove llama_cpp_python
-pip install instructlab[cpu] \
-   --extra-index-url=https://download.pytorch.org/whl/cpu \
-   -C cmake.args="-DLLAMA_NATIVE=off"
-```
-
-!!! note
-    *Additional Build Argument for Intel Macs*
-
-    If you have an Mac with an Intel CPU, you must add a prefix of
-    `CMAKE_ARGS="-DLLAMA_METAL=off"` to the `pip install` command to ensure
-    that the build is done without Apple M-series GPU support.
-
-    `(venv) $ CMAKE_ARGS="-DLLAMA_METAL=off" pip install ...`
-
-### Install with Apple Metal on M1/M2/M3 Macs
-
-!!! note
-    Make sure your system Python build is `Mach-O 64-bit executable arm64` by using `file -b $(command -v python)`,
-    or if your system is setup with [pyenv](https://github.com/pyenv/pyenv) by using the `file -b $(pyenv which python)` command.
-
-```shell
-python3 -m venv --upgrade-deps venv
-source venv/bin/activate
-pip cache remove llama_cpp_python
-pip install instructlab[mps]
-```
-
-### Install with Nvidia CUDA
-
-```shell
-python3 -m venv --upgrade-deps venv
-source venv/bin/activate
-pip cache remove llama_cpp_python
-pip install instructlab[cuda] \
-   -C cmake.args="-DLLAMA_CUDA=on" \
-   -C cmake.args="-DLLAMA_NATIVE=off"
-```
-
-## Verify `ilab` is installed
-
-From your `venv` environment, verify `ilab` is installed correctly, by running the `ilab` command.
-
-```shell
-ilab
-```
-
-*Example output of the `ilab` command*
-
-```shell
-(venv) $ ilab
-Usage: ilab [OPTIONS] COMMAND [ARGS]...
-
-CLI for interacting with InstructLab.
-
-If this is your first time running InstructLab, it's best to start with `ilab config init` to create the environment.
-
-Options:
---config PATH  Path to a configuration file.  [default: config.yaml]
---version      Show the version and exit.
---help         Show this message and exit.
-
-Command:
-   config      Command group for Interacting with the Config of InstructLab
-   data        Command group for Interacting with the Data of generated by...
-   model       Command group for Interacting with the Models in InstructLab
-   sysinfo     Print system information
-   taxonomy    Command group for Interacting with the Taxonomy in InstructLab
-
-Aliases:
-   chat: model chat
-   convert: model convert
-   diff: taxonomy diff
-   download: model download
-   generate: data generate
-   init: config init
-   serve: model serve
-   test: model test
-   train: model train
-```
-
-### 🏗️ Initialize `ilab`
-
-1. Initialize `ilab` by running the following command:
-
-```shell
-ilab config init
-```
-
-*Example output*
-
-```shell
-Welcome to InstructLab CLI. This guide will help you set up your environment.
-Please provide the following values to initiate the environment [press Enter for defaults]:
-Path to taxonomy repo [taxonomy]: <ENTER>
-```
-
-2. When prompted by the interface, press **Enter** to add a new default `config.yaml` file.
-
-3. When prompted, clone the `https://github.com/instructlab/taxonomy.git` repository into the current directory by typing **y**.
-
-**Optional**: If you want to point to an existing local clone of the `taxonomy` repository, you can pass the path interactively or alternatively with the `--taxonomy-path` flag.
-
-*Example output after initializing `ilab`*
-
-```shell
-(venv) $ ilab config init
-Welcome to InstructLab CLI. This guide will help you set up your environment.
-Please provide the following values to initiate the environment [press Enter for defaults]:
-Path to taxonomy repo [taxonomy]: <ENTER>
-`taxonomy` seems to not exists or is empty. Should I clone https://github.com/instructlab/taxonomy.git for you? [y/N]: y
-Cloning https://github.com/instructlab/taxonomy.git...
-Generating `config.yaml` in the current directory...
-Initialization completed successfully, you're ready to start using `ilab`. Enjoy!
-```
-
-`ilab` will use the default configuration file unless otherwise specified. You can override this behavior with the `--config` parameter for any `ilab` command.
-
-### 📥 Download the model
-
-- Run the `ilab model download` command.
+Open up your terminal, and run the following commands:
 ```bash
-ilab download --repository instructlab/granite-7b-lab-GGUF --filename=granite-7b-lab-Q4_K_M.gguf
+ollama pull granite-code:20b
+ollama pull granite-code:8b
 ```
 
-### Serve the granite model
+## Set up Continue
 
-- Let serve the granite model to verify it's working.
+Now we need to install [continue.dev](https://continue.dev) so VSCode can "talk" to the ollama instance, and work with the
+granite model(s). There are two different ways of getting `continue` installed. If you have your `terminal` already open
+you can run:
 
 ```bash
-ilab serve --model-path models/granite-7b-lab-Q4_K_M.gguf
+code --install-extension continue.continue
 ```
 
-- In another terminal run the `ilab chat`
+If not you can use these steps in VSCode:
 
-```bash
-cd instructlab
-source venv/bin/activate
-ilab model chat
+1. Open the Extensions tab.
+2. Search for "continue."
+3. Click the Install button.
+
+Next you'll need to configure `continue` which will require you to take the following `json` and open the `config.json`
+file via the command pallete.
+
+1. Open the command pallette (Press Ctrl/Cmd+Shift+P)
+2. Select Continue: Open `config.json`.
+
+Copy the following `json` into the locations that are in the `config.json` file.
+```json
+  "models": [
+    {
+      "title": "Granite Code 20b",
+      "provider": "ollama",
+      "model": "granite-code:20b"
+    }
+  ],
+
+  "tabAutocompleteModel": {
+    "title": "Granite Code 8b",
+    "provider": "ollama",
+    "model": "granite-code:8b"
+  },
 ```
 
-### Chat with the model!
+!!! note
+    The "models" and "tabAutocompleteModel" are different sections, and be sure to line them up correctly
+    in the unedited pre-installed `config.json`.
 
-Ask it some questions, things like:
+## Sanity Check
 
-- Who is batman?
-- What is the capital of Sweden?
+Now that you have everything wired together in VSCode, lets make sure that everything works. Go ahead and open
+up `continue` on the extention bar:
 
-Now that you have a working `instructlab` setup, lets get to actually tuning the model. Lets move over to Lab 2!
+![](https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/lKHl3FNCegebKYdHuXR-GA/continue-sidebar.png)
 
-<img src="https://count.asgharlabs.io/count?p=/lab3_opensource_ai_page>
+And ask it something! Something fun I like is:
+
+```text
+What language should I use for backend development?
+```
+
+It should give you a pretty generic answer, but as you can see, it works, and hopefully will help spur a thought
+or two, now lets continue on to Lab 2, where we are going to actually this process in-depth!
+
+[paper]: https://arxiv.org/pdf/2405.04324?utm_source=ibm_developer&utm_content=in_content_link&utm_id=tutorials_awb-local-ai-copilot-ibm-granite-code-ollama-continue
+
+<img src="https://count.asgharlabs.io/count?p=/lab1_opensource_ai_page">
+

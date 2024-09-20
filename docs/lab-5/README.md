@@ -1,59 +1,33 @@
-In this tutorial we will walk you through building out a new `qna.yaml` for adding new or updated knowledge to the `granite-7b-lab` model. Let's get started!
+# Using the InstructLab UI
 
-!!! tip
-	A quick aside, if you have reached this point, you probably have noticed gaps in the model, or maybe some knowledge needs to be updated. In theory the work you do here will be able to upstreamed to the public taxonomy repository, and you can help shape our community based model! Thank you!
+Now that you've run InstructLab locally, let's try contributing to the Open-Source project using the [InstructLab UI](https://qa.ui.instructlab.ai/)
 
-```bash
-mkdir instructlab
-git clone git@github.com:erictherobot/wikipedia-markdown-generator.git
-```
-The first thing we need to do is create a new directory to have a clean place to work and pull down some software. Most of the time, the easiest thing to update in the model is the Wikipedia entry, so luckily, `erictherobot` has written a helpful tool to pull down markdown versions of the articles for us.
+## Verify Access
 
-```bash
-git clone git@github.com:<USERNAME>/instructlab-knowledge-docs.git
-```
+If you are not part of the InstructLab organization already, you will need to request access using your github username
+through this [link](https://instructlab-inviter-instructlab-public-inviter.qa-ui-instructlab-ai-0e3e0ef4c9c6d831e8aa6fe01f33bfc4-0000.us-south.containers.appdomain.cloud/)
 
-After this, clone down your instructlab knowledge docs repository. It can be named whatever you'd like, but if you use our https://ui.instructlab.ai, you'll notice you already have `instructlab-knowledge-docs`.
+You will then be able to login the [InstructLab UI](https://qa.ui.instructlab.ai/) using GitHub SSO
 
-```bash
-cd wikipedia-markdown-generator
-python3.11 -m venv venv-md-gen
-source venv-md-gen/bin/activate
-pip install -r requirements
-python3 wiki-to-md.py Texas_Longhorns_football
-```
-Next, we need to build a Python virtual environment and install the dependencies to get it to work. These commands cd into the directory, create the virtual environment with python3.11 (you may need to change the version of Python on your machine), activate the virtual environment, and then do the pip install the dependencies.
-You'll notice the `Texas_Longhorns_football` there, a Wikipedia article I wanted to pull down and create the `qna.yaml` against. You should choose whatever new knowledge you want to do here.
+## Chatting with Model
 
-```bash
-cp md_output/Texas_Longhorns_football.md ../../instructlab-knowledge-docs/
-cd ../../instructlab-knowledge-docs
-git add .
-git commit -m "added markdown doc"
-git push origin main
-cd ..
-```
+Through the UI, you will have access to the chat function. Like the chat through the CLI, this will allow you to chat with the model
+to see if the model has the knowledge/skill you are looking for. Unlike the CLI version, this will give you the opportunity to chat
+with a full Granite-7B model, giving you a better understanding of what capabilities the model already has.
 
-Next, we go ahead and copy the markdown into the knowledge repository, and commit it to our repository and push it up to GitHub.
+You can navigate to this Chat by going the the menu on the left-hand side -> Playground dropdown -> Chat
 
-```
-git clone git@github.com/instructlab/taxonomy
-cd taxonomy
-```
+XXXXXXXX
+Screenshot
+XXXXXXXX
 
-Next we pull down the upstream public taxonomy directory, and `cd` into that directory.
+## Creating a Skill Contribution
 
-```bash
-mkdir -p arts/sports/american_football/college/university_of_texas/
-```
-This next step is a "best effort" for you. As the taxonomy grows, there will be some obvious choices, but if you select a tree that hasn't been flushed out yet, you'll have to do your best to think about where you'd find the `qna.yaml`. In this case, the Dewey Decimal System says sports should be under arts; this is American Football, college level with the University of Texas. Also, notice the underscores for the spaces; this is important.
+## Creating a Knowledge Contribution
 
-```bash
-wget https://raw.githubusercontent.com/instructlab/taxonomy/main/docs/template_qna.yaml
-mv template_qna.yaml sports/american_football/college/university_of_texas/qna.yaml
-```
-Finally, you can pull down the `template_qna.yaml` and fill it out for the needed questions and answers. Be sure to put the context at a maximum of about 500 Tokens and questions and answers around 250 Tokens.
+## Submitting your Contributions
 
-```
-vim sports/american_football/college/university_of_texas/qna.yaml
-```
+
+TODO: Guided UI screenshots
+
+
