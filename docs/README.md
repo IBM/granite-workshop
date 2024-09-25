@@ -11,8 +11,10 @@ After this we will show the simplified contribution workflow throught the [Instr
 
 By the end of this workshop, you will be able to:
 
-* Understand what InstructLab is and its general use cases
-* Create and test your own knowledge and skill submissions locally using the CLI
+* Understand what Granite is and its general use cases.
+* Understand what InstructLab is and its general use cases.
+* Walk away with a local AI Co-Pilot for free, secure and air gapped!
+* Create and test your own knowledge and skill submissions locally using the CLI and UI
 * Learn a suggested workflow on how to fine tune a model with new knowledge and skills!
 
 ### About this workshop
