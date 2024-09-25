@@ -37,6 +37,7 @@ theme:
   icon:
     logo: material/library
   logo: images/ibm-blue-background.png
+  favicon: images/favicon.ico
   features:
     - navigation.tabs
     #- navigation.instant
