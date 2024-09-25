@@ -45,8 +45,9 @@ If not you can use these steps in VSCode:
 Next you'll need to configure `continue` which will require you to take the following `json` and open the `config.json`
 file via the command pallete.
 
-1. Open the command pallette (Press Ctrl/Cmd+Shift+P)
-2. Select Continue: Open `config.json`.
+With VSCode running:
+1. Open the command pallette: (Press Cmd+Shift+P)
+2. Scroll down and select `Continue: Open config.json`
 
 Copy the following `json` into the locations that are in the `config.json` file.
 ```json
@@ -83,7 +84,7 @@ What language should I use for backend development?
 ```
 
 It should give you a pretty generic answer, but as you can see, it works, and hopefully will help spur a thought
-or two, now lets continue on to Lab 2, where we are going to actually this process in-depth!
+or two, now lets continue on to Lab 2, where we are going to explore this process in-depth!
 
 [paper]: https://arxiv.org/pdf/2405.04324?utm_source=ibm_developer&utm_content=in_content_link&utm_id=tutorials_awb-local-ai-copilot-ibm-granite-code-ollama-continue
 
