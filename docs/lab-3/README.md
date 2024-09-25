@@ -1,4 +1,4 @@
-# Building your local AI co-pilot
+# Setting up InstructLab
 
 Now that we have a working VSCode instance working with the granite model, lets talk about more
 things you can do with an InstructLab system. This is where the [InstructLab](https://instructlab.ai/)
