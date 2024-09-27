@@ -9,8 +9,7 @@ Large language models (LLMs) are a category of foundation models trained on imme
 understanding and generating natural language and other types of content to perform a wide range of tasks.
 
 ##### Granite
-Granite is a family of IBM
-XXXXXXXXXXXXXXXXXXXXXXXXXX
+Granite is a family of IBM artificial intelligence (AI) models built for business, to help drive trust and scalability in AI-driven applications.
 
 #### What is InstructLab?
 
@@ -103,6 +102,12 @@ After the installation is complete, install [ollama](https://ollama.com) via `br
 ```bash
 brew install ollama
 ```
+
+Next, start up ollama from a terminal window:
+```bash
+ollama serve
+```
+And leave that terminal window running for the rest of the labs.
 
 ### Windows installation steps
 
