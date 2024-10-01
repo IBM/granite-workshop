@@ -26,19 +26,16 @@ The introductory page of the workshop is broken down into the following sections
 |  |  |
 | :--- | :--- |
 | [Lab 0: Pre-work](pre-work/README.md)  | Pre-work for the project |
-| [Lab 1: Installing a local AI](lab-1/README.md) | |
-| [Lab 2: Using a local AI](lab-2/README.md) | |
-| [Lab 3: Building your local AI co-pilot](lab-3/README.md)| |
-| [Lab 4: Tuning your local AI](lab-4/README.md) | |
-| [Lab 5: Using the InstructLab UI for AI Tuning](lab-5/README.md) | |
+| [Lab 1: Granite Code Cookbook](lab-1/README.md) | Generating Bash Code with Granite Code and Ollama |
+| [Lab 2: Granite Timeseries Cookbook](lab-2/README.md) | Energy Demand Forecasting with Granite Timeseries (TTM) |
+| [Lab 3: RAG with LangChain](lab-3/README.md)| Retrieval Augmented Generation (RAG) with Langchain using Granite|
+
 
 ## Compatibility
 
 This workshop has been tested on the following platforms:
 
-* **MacOS**: version 14.5
-* **Windows**: version 11
-* **Linux**: Fedora 40
+XXXXXXXXXXXXXXXX
 
 ## Credits
 
