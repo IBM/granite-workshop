@@ -14,14 +14,13 @@ nav:
     - About the workshop: README.md
   - Workshop:
     - Lab 0. Pre-work: pre-work/README.md
-    - Lab 1. Coding with Granite: lab-1/Text_to_Shell.ipynb
-    - Lab 2. Time Series Analysis with Granite: lab-2/Time_Series_Getting_Started.ipynb
-    - Lab 3. RAG with Langchain using Granite: lab-3/RAG_with_Langchain.ipynb
+    - Lab 1. Coding with Granite: lab-1/README.md
+    - Lab 2. Time Series Analysis with Granite: lab-2/README.md
+    - Lab 3. RAG with Langchain using Granite: lab-3/README.md
   - References:
     - Additional Resources: resources/RESOURCES.md
     - MkDocs Cheatsheet: resources/MKDOCS.md
-plugins:
-    - mkdocs-jupyter
+
     
 ## DO NOT CHANGE BELOW THIS LINE
 
