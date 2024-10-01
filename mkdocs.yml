@@ -16,7 +16,7 @@ nav:
     - Lab 0. Pre-work: pre-work/README.md
     - Lab 1. Installing a local AI: lab-1/README.md
     - Lab 2. Using a local AI: lab-2/README.md
-    - Lab 3. Building your local AI co-pilot: lab-3/README.md
+    - Lab 3. Setting up InstructLab: lab-3/README.md
     - Lab 4. Tuning your local AI: lab-4/README.md
     - Lab 5. Using the InstructLab UI for AI Tuning: lab-5/README.md
   - References:
@@ -37,6 +37,7 @@ theme:
   icon:
     logo: material/library
   logo: images/ibm-blue-background.png
+  favicon: images/favicon.ico
   features:
     - navigation.tabs
     #- navigation.instant

@@ -10,8 +10,8 @@ Welcome to our workshop! In this workshop we will be trying out some open-source
 
 By the end of this workshop, you will be able to:
 
-* Understand what the Granite models are and why they are important
-* Setup, run, and test granite models on your own machine for a variety of use cases
+* Understand what InstructLab is and its general use cases
+* Create and test your own knowledge and skill submissions locally using the CLI
 
 ### About this workshop
 
@@ -26,9 +26,11 @@ The introductory page of the workshop is broken down into the following sections
 |  |  |
 | :--- | :--- |
 | [Lab 0: Pre-work](pre-work/README.md)  | Pre-work for the project |
-| [Lab 1: Granite Code Cookbook](lab-1/README.md) | |
-| [Lab 2: Granite Time Series Cookbook](lab-2/README.md) | |
-| [Lab 3: RAG with Granite](lab-3/README.md)| |
+| [Lab 1: Installing a local AI](lab-1/README.md) | |
+| [Lab 2: Using a local AI](lab-2/README.md) | |
+| [Lab 3: Building your local AI co-pilot](lab-3/README.md)| |
+| [Lab 4: Tuning your local AI](lab-4/README.md) | |
+| [Lab 5: Using the InstructLab UI for AI Tuning](lab-5/README.md) | |
 
 ## Compatibility
 
