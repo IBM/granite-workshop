@@ -1,197 +1,171 @@
-# Setting up InstructLab
+# Retrieval Augmented Generation (RAG) with Langchain
+*With IBM Granite Models*
 
-Now that we have a working VSCode instance working with the granite model, lets talk about more
-things you can do with an InstructLab system. This is where the [InstructLab](https://instructlab.ai/)
-project comes into play.
+## In this notebook
+This notebook contains instructions for performing Retrieval Augumented Generation (RAG). RAG is an architectural pattern that can be used to augment the performance of language models by recalling factual information from a knowledge base, and adding that information to the model query. The most common approach in RAG is to create dense vector representations of the knowledge base in order to retrieve text chunks that are semantically similar to a given user query.
 
-Now that we've used the foundation model from upstream, lets add some knowledge to our model that we want
-it to have.
+RAG use cases include:
+- Customer service: Answering questions about a product or service using facts from the product documentation.
+- Domain knowledge: Exploring a specialized domain (e.g., finance) using facts from papers or articles in the knowledge base.
+- News chat: Chatting about current events by calling up relevant recent news articles.
 
-!!! note
-    As of this writing (and we haven't updated it so it's still true) this **Does NOT** work with Granite-Code,
-    but instead the core Granite model. When this note is removed and we have a `qna.yaml` like way to train
-    Granite-Code we will update this tutorial.
+In its simplest form, RAG requires 3 steps:
+
+- Initial setup:
+  - Index knowledge-base passages for efficient retrieval. In this recipe, we take embeddings of the passages using WatsonX, and store them in a vector database.
+- Upon each user query:
+  - Retrieve relevant passages from the database. In this recipe, we using an embedding of the query to retrieve semantically similar passages.
+  - Generate a response by feeding retrieved passage into a large language model, along with the user query.
+
+## Setting up the environment
+
+Ensure you are running python 3.10 in a freshly-created virtual environment.
 
 
-## Requirements
-
-- **🍎 Apple M1/M2/M3 Mac or 🐧 Linux system** (tested on Fedora).
-- C++ compiler
-- Python 3.10 or Python 3.11
-- Approximately 60GB disk space (entire process)
-
-!!! note
-    When installing the `ilab` CLI on macOS, you may have to run the `xcode-select --install` command, installing the required packages previously listed.
-
-!!! warning
-    If you are running on Windows, you should use WSL2 for this, but it _is unsupported_ but we will do our best to get you success if you run into any problems.
-
-## Installing `ilab`
-
-Create a new directory called `instructlab` to store the files the `ilab` CLI needs when running and `cd` into the directory by running the following command:
-
-```shell
-mkdir instructlab
-cd instructlab
+```python
+import sys
+assert sys.version_info >= (3, 10) and sys.version_info < (3, 11), "Use Python 3.10 to run this notebook."
 ```
 
-See [the GPU acceleration documentation](https://github.com/instructlab/instructlab/blob/main/docs/gpu-acceleration.md) for how to
-to enable hardware acceleration for interaction and training on AMD ROCm,
-Apple Metal Performance Shaders (MPS), and Nvidia CUDA.
+### Install and import the dependencies
 
-### Install using PyTorch without CUDA bindings and no GPU acceleration
+Install the dependencies in one `pip` command, so that pip's dependency resolver can include them all.
 
-```shell
-python3 -m venv --upgrade-deps venv
-source venv/bin/activate
-pip cache remove llama_cpp_python
-pip install instructlab[cpu] \
-   --extra-index-url=https://download.pytorch.org/whl/cpu \
-   -C cmake.args="-DLLAMA_NATIVE=off"
+
+```python
+! pip install \
+  "git+https://github.com/ibm-granite-community/utils.git" \
+  "wget"
 ```
 
-!!! note
-    *Additional Build Argument for Intel Macs*
 
-    If you have an Mac with an Intel CPU, you must add a prefix of
-    `CMAKE_ARGS="-DLLAMA_METAL=off"` to the `pip install` command to ensure
-    that the build is done without Apple M-series GPU support.
-
-    `(venv) $ CMAKE_ARGS="-DLLAMA_METAL=off" pip install ...`
-
-### Install with Apple Metal on M1/M2/M3 Macs
-
-!!! note
-    Make sure your system Python build is `Mach-O 64-bit executable arm64` by using `file -b $(command -v python)`,
-    or if your system is setup with [pyenv](https://github.com/pyenv/pyenv) by using the `file -b $(pyenv which python)` command.
-
-```shell
-python3 -m venv --upgrade-deps venv
-source venv/bin/activate
-pip cache remove llama_cpp_python
-pip install instructlab[mps]
+```python
+from ibm_granite_community.langchain_utils import find_langchain_model, find_langchain_vector_db
 ```
 
-### Install with Nvidia CUDA
+## Selecting System Components
 
-```shell
-python3 -m venv --upgrade-deps venv
-source venv/bin/activate
-pip cache remove llama_cpp_python
-pip install instructlab[cuda] \
-   -C cmake.args="-DLLAMA_CUDA=on" \
-   -C cmake.args="-DLLAMA_NATIVE=off"
+### Choose your Embeddings Model
+
+Specify the model to use for generating embedding vectors from text.
+
+To use a model from a provider other than Huggingface, replace this code cell with one from [this Embeddings Model recipe](https://github.com/ibm-granite-community/utils/blob/main/recipes/Components/Langchain_Embeddings_Models.ipynb).
+
+
+```python
+from langchain_huggingface import HuggingFaceEmbeddings
+embeddings_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 ```
 
-## Verify `ilab` is installed
+### Choose your Vector Database
 
-From your `venv` environment, verify `ilab` is installed correctly, by running the `ilab` command.
+Specify the database to use for storing and retrieving embedding vectors.
 
-```shell
-ilab
+To connect to a vector database other than Milvus substitute this code cell with one from [this Vector Store recipe](https://github.com/ibm-granite-community/utils/blob/main/recipes/Components/Langchain_Vector_Stores.ipynb).
+
+
+```python
+from langchain_milvus import Milvus
+import uuid
+
+db_file = f"/tmp/milvus_{str(uuid.uuid4())[:8]}.db"
+print(f"The vector database will be saved to {db_file}")
+
+vector_db = Milvus(embedding_function=embeddings_model, connection_args={"uri": db_file}, auto_id=True)
 ```
 
-*Example output of the `ilab` command*
+### Choose your LLM
+Specify the model that will be used for inferencing, given a query and the retrieved text.
 
-```shell
-(venv) $ ilab
-Usage: ilab [OPTIONS] COMMAND [ARGS]...
+To connect to a model on a provider other than Replicate, substitute this code cell with one from [this LLM component recipe](https://github.com/ibm-granite-community/utils/blob/main/recipes/Components/Langchain_LLMs.ipynb).
 
-CLI for interacting with InstructLab.
 
-If this is your first time running InstructLab, it's best to start with `ilab config init` to create the environment.
+```python
+from langchain_community.llms import Replicate
+from ibm_granite_community.notebook_utils import get_env_var
 
-Options:
---config PATH  Path to a configuration file.  [default: config.yaml]
---version      Show the version and exit.
---help         Show this message and exit.
-
-Command:
-   config      Command group for Interacting with the Config of InstructLab
-   data        Command group for Interacting with the Data of generated by...
-   model       Command group for Interacting with the Models in InstructLab
-   sysinfo     Print system information
-   taxonomy    Command group for Interacting with the Taxonomy in InstructLab
-
-Aliases:
-   chat: model chat
-   convert: model convert
-   diff: taxonomy diff
-   download: model download
-   generate: data generate
-   init: config init
-   serve: model serve
-   test: model test
-   train: model train
+model = Replicate(
+    model="ibm-granite/granite-8b-code-instruct-128k",
+    replicate_api_token=get_env_var('REPLICATE_API_TOKEN'),
+)
 ```
 
-### 🏗️ Initialize `ilab`
+## Building the Vector Database
 
-1. Initialize `ilab` by running the following command:
+In this example, we take the State of the Union speech text, split it into chunks, derive embedding vectors using the embedding model, and load it into the vector database for querying.
 
-```shell
-ilab config init
+### Download the document
+
+Here we use President Biden's State of the Union address from March 1, 2022.
+
+
+```python
+import os, wget
+
+filename = 'state_of_the_union.txt'
+url = 'https://raw.github.com/IBM/watson-machine-learning-samples/master/cloud/data/foundation_models/state_of_the_union.txt'
+
+if not os.path.isfile(filename):
+  wget.download(url, out=filename)
 ```
 
-*Example output*
+### Split the document into chunks
 
-```shell
-Welcome to InstructLab CLI. This guide will help you set up your environment.
-Please provide the following values to initiate the environment [press Enter for defaults]:
-Path to taxonomy repo [taxonomy]: <ENTER>
+Split the document into text segments that can fit into the model's context window.
+
+
+```python
+from langchain.document_loaders import TextLoader
+from langchain.text_splitter import CharacterTextSplitter
+
+loader = TextLoader(filename)
+documents = loader.load()
+text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+texts = text_splitter.split_documents(documents)
 ```
 
-2. When prompted by the interface, press **Enter** to add a new default `config.yaml` file.
+### Create and populate the vector database
 
-3. When prompted, clone the `https://github.com/instructlab/taxonomy.git` repository into the current directory by typing **y**.
+NOTE: Population of the vector database may take over a minute depending on your embedding model and service.
 
-**Optional**: If you want to point to an existing local clone of the `taxonomy` repository, you can pass the path interactively or alternatively with the `--taxonomy-path` flag.
 
-*Example output after initializing `ilab`*
-
-```shell
-(venv) $ ilab config init
-Welcome to InstructLab CLI. This guide will help you set up your environment.
-Please provide the following values to initiate the environment [press Enter for defaults]:
-Path to taxonomy repo [taxonomy]: <ENTER>
-`taxonomy` seems to not exists or is empty. Should I clone https://github.com/instructlab/taxonomy.git for you? [y/N]: y
-Cloning https://github.com/instructlab/taxonomy.git...
-Generating `config.yaml` in the current directory...
-Initialization completed successfully, you're ready to start using `ilab`. Enjoy!
+```python
+# vector_db = vector_db_class.from_documents(texts, embeddings)
+vector_db.add_documents(texts)
 ```
 
-`ilab` will use the default configuration file unless otherwise specified. You can override this behavior with the `--config` parameter for any `ilab` command.
+## Querying the Vector Database
 
-### 📥 Download the model
+### Conduct a similarity search
 
-- Run the `ilab model download` command.
-```bash
-ilab download --repository instructlab/granite-7b-lab-GGUF --filename=granite-7b-lab-Q4_K_M.gguf
+Search the database for similar documents by proximity of the embedded vector in vector space.
+
+
+```python
+query = "What did the president say about Ketanji Brown Jackson"
+docs = vector_db.similarity_search(query)
+print(docs[0].page_content)
 ```
 
-### Serve the granite model
+## Answering Questions
 
-- Let serve the granite model to verify it's working.
+### Automate the RAG pipeline
 
-```bash
-ilab serve --model-path models/granite-7b-lab-Q4_K_M.gguf
+Build a question-answering chain with the model and the document retriever.
+
+
+```python
+from langchain.chains import RetrievalQA
+
+qa = RetrievalQA.from_chain_type(llm=model, chain_type="stuff", retriever=vector_db.as_retriever()) # , chain_type_kwargs={"verbose": False})
 ```
 
-- In another terminal run the `ilab chat`
+### Generate a retrieval-augmented response to a question
 
-```bash
-cd instructlab
-source venv/bin/activate
-ilab model chat
+Use the question-answering chain to process the query. 
+
+
+```python
+query = "What did the president say about Ketanji Brown Jackson"
+qa.invoke(query)
 ```
-
-### Chat with the model!
-
-Ask it some questions, things like:
-
-- Who is batman?
-- What is the capital of Sweden?
-
-Now that you have a working `instructlab` setup, lets get to actually tuning the model. Lets move over to Lab 4!
-
-<img src="https://count.asgharlabs.io/count?p=/lab3_opensource_ai_page>

@@ -11,77 +11,71 @@ understanding and generating natural language and other types of content to perf
 ##### Granite
 Granite is a family of IBM artificial intelligence (AI) models built for business, to help drive trust and scalability in AI-driven applications.
 
-#### What is InstructLab?
+#### Why should you use Granite?
+XXXXXXXXXXXXXXXXXXXXXXXXXX
 
-InstructLab is an open-source AI project that aims to make it easier for anyone to contribute to Large Language Models (LLMs).
-It's a community-driven initiative that allows users to add "skills" or "knowledge" to existing LLMs in a way that's both accessible and effective.
+## Running the Granite Notebooks Locally
+How to run the Granite Jupyter notebooks on your computer.
 
-#### Why InstructLab
-There are many projects rapidly embracing and extending permissively licensed AI models, but they are faced with three main challenges:
+## Clone the Granite Workshop Repository
 
-* Contribution to LLMs is not possible directly. They show up as forks, which forces consumers to choose a “best-fit” model that isn’t easily extensible. Also, the forks are expensive for model creators to maintain.
-* The ability to contribute ideas is limited by a lack of AI/ML expertise. One has to learn how to fork, train, and refine models to see their idea move forward. This is a high barrier to entry.
-* There is no direct community governance or best practice around review, curation, and distribution of forked models.
+Clone the repo and cd into the repo directory.
 
-**InstructLab is here to solve these problems.**
 
-The project enables community contributors to add additional "skills" or "knowledge" to a particular model.
+```python
+git clone git@github.com:IBM/granite-workshop.git
 
-InstructLab's model-agnostic technology gives model upstreams with sufficient infrastructure resources the ability to create regular builds of their open source licensed models not by rebuilding and retraining the entire model but by composing new skills into it.
-
-Take a look at "lab-enhanced" models on the [InstructLab Hugging Face page](https://huggingface.co/instructlab).
-
-#### How does InstructLab work?
-InstructLab leverages [synthetic data](https://www.ibm.com/topics/synthetic-data) generation to create datasets used to tune models.
-This allows users to tune models for specific tasks and teach models new knowledge without needing large amounts of user data.
-The user provided data is added to a [taxonomy](https://github.com/instructlab/taxonomy) tree in the form of YAML files and markdown documents as needed for knowledge.
-The InstructLab training process then generates sythetic data from the files in the taxonomy true and samlples from the data using the Lab tuning process.
-More details and specifics in this process can be found [here](https://arxiv.org/pdf/2403.01081), in the original paper detailing this process created by
-IBM researchers.
-
-## Visual Studio Code
-
-#### Mac installation steps
-
-Open up a terminal, and install [homebrew](https://brew.sh/), if you haven't already.
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+cd granite-workshop
 ```
 
-After the installation is complete, install [vscode](https://code.visualstudio.com/) via `brew`.
+## Create and Activate a Virtual Environment
 
-```bash
-brew install --cask visual-studio-code
+Use a [python virtual environment](https://docs.python.org/3/library/venv.html) for installed libraries. Open a terminal, and from the command line, run:
+
+
+```python
+python -m venv .venv
 ```
 
-### Windows installation steps
+Activate the virtual environment in the by running:
 
-!!! note
-    If you are running this workshop on Windows, as of this writing it's an
-    unsupported platform. You may run into some issues, and as they say "There
-    be dragons."
 
-Install Code via the website [here](https://code.visualstudio.com/Download).
-
-## Python
-
-Python is a whole programming language. There are multpile ways to install it, and
-[here is the offical website](https://www.python.org). Please take a moment and if you can't run
-the following command, reach out to a teaching assissant or instructor to help you
-get resolved.
-
-```bash
-python --version
-Python 3.12.4
+```python
+source ./.venv/bin/activate
 ```
 
-Please confirm that your `python --version` is at least `3.11+` for the best experience.
+## Install and Run Jupyter
+
+For more detail, see the installation Instructions at [Jupyter.org](https://jupyter.org/install)
+
+Install jupyter notebook with pip in the virtual environment:
 
 
-## Ollama
+```python
+pip install notebook
+```
 
-#### Mac installation steps
+## Open a Recipe in Jupyter Notebook
+
+To open a recipe notebook in jupyter, from the virtual environment, run:
+
+```jupyter notebook <recipe-notebook-file-path>```
+
+To run the "Text to Shell" recipe from the repository root, for example:
+
+
+```python
+jupyter notebook ./notebooks/Text_to_Shell/Text_to_Shell.ipynb
+```
+
+You should see the notebook in your browser now!
+
+## Extra: Jupyter Lab
+
+[Jupyter Lab](https://jupyter.org/try-jupyter/lab/) provides a web-based notebook IDE, for interactive development of Jupyter notebooks.
+
+
+```python
 
 ##### Download via the Ollama website
 

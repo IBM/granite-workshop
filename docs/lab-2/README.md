@@ -1,168 +1,380 @@
-# Using a local AI
+# Energy Demand Forecasting with Granite Timeseries (TTM)
 
-Lets play with our new found local AI Open Source AI!
+TinyTimeMixers (TTMs) are compact pre-trained models for Multivariate Time-Series Forecasting, open-sourced by IBM Research. With less than 1 Million parameters, TTM introduces the notion of the first-ever "tiny" pre-trained models for Time-Series Forecasting. TTM outperforms several popular benchmarks demanding billions of parameters in zero-shot and few-shot forecasting and can easily be fine-tuned for multi-variate forecasts.
 
-## Sanity checks
+### Install the TSFM Library 
 
-When you open up `continue` inside of VSCode it should look something like:
-![](https://docs.continue.dev/assets/images/understand-ca0edc3d06922dd4a95e31fa06f999ec.gif)
+The [granite-tsfm library](https://github.com/ibm-granite/granite-tsfm) provides utilities for working with Time Series Foundation Models (TSFM). Here the pinned version is retrieved and installed.
 
-Before we go any farther, write in "Who is batman?" to verify that `ollama`,
-VSCode, and `continue` are all working correctly.
-
-!!! troubleshooting
-    If Continue is taking a long time to respond, restart Visual Studio Code. If that doesn't resolve your issue, restart Ollama.
-
-If you would like to go deeper with continue, take a look at the [official Continue.dev how-to guide]( https://docs.continue.dev/how-to-use-continue).
-
-Now that we have our local AI co-pilot with us, let's start using it. Now these
-next examples are going to be focused on `python` but there is nothing stopping
-you from doing this exact same process with `go`, `javascript`, `rust`, or the
-like. Part of learning about leveraging this technology is finding the boarders
-of its skill sets, and hopefully walking through this you'll understand that
-this technology is there to support you, not _do_ your work.
-
-Now, lets open up VSCode and have it look something like the following:
-![batman](../images/whoisbatman.png)
-
-## Building out `main.py`
-
-Now create a new file, and put it in a new directory. Normally it's `ctrl-n` or `command-n` call it
-`main.py`.
-
-This is where you should probably "clear" the context window, so either use `ctrl-l` or `command-l` so
-your context is clear like the example here:
-![clear](../images/clearscreen.png)
-
-Now use the `command-i` or `ctrl-i` to open up the `generate code` command palette, and write in:
-```
-write me out conways game of life using pygame
-```
-
-Now granite-code should start giving you a good suggestion here, it should look something like:
-![gameoflife_v1](../images/gameoflife_v1.png)
-
-!!! note
-    It won't be the same will it? That is expected, but you should notice that it's _close_.
-
-
-## Reading AI generated code
-
-Now what have you noticed here? Try to run it...does it work? Wait, why are there errors in this code?
-
-This is an important lesson for using _any_ AI co-pilot code assistants. They can give you the "lions share"
-of what you need, but it won't get you across the finish line. It gives you that "second pair of eyes" and provides
-something to work with, but not everything you need.
-
-Don't believe me? Bring up the terminal and attempt to run this code after you accepting it.
-
-![nope doesn't do anything](../images/nowork.png)
-
-Well that isn't good is it? Yours may be different code, or maybe it does work, but at least in this
-example we need to to get it fixed.
-
-## First pass at debugging
-
-I'll run the following commands to build up an virtual environment, and install some modules, lets
-see how far we get.
-
-```bash
-python3.11 -m venv venv
-source venv/bin/activate
-(venv) pip install pygame
-```
-
-Well better, I think, but nothing still happens. So even noticing the `import pygame` tells me I need to
-debug farther. There's a few paths here, personally I'm going to take this code, and clean it up a bit
-so it's more readable.
-
-## Cleaning up the AI generated code
-
-!!! note
-    You can try using the built-in autocomplete and code assistant functions to generate any missing code. In our example, we're missing a "main" entry point to the script. Try hitting `cmd/ctrl + I` again, and typing in something like: "write a main function for my game that plays twenty rounds of Conway's game of life using the `board()` function". What happens?
-
-Cleaning up the code. Now everything is smashed together, it's hard to read the logic here, so first
-thing first, going to break up the code and add a `def main` function so I know what the entry point is.
-
-On my version, I had a `tkinter` section, I decided to put the main game loop there:
-```python
-if __name__ == '__main__':
-    root = tkinter.Tk()
-    game_of_life(tkinter.Canvas(root))
-    root.mainloop()
-```
-
-But above it, it seems there's a red squiggly! Remember all I added was some line breaks to for readability,
-so another problem this AI gave me, so I need to resolve this too.
-
-![broken main](../images/broken_main.png)
-
-For me, all I had to do was remove those extra spaces, but I'd be curious to know what your AI gave you...
-
-## Second pass at debugging
-
-Now that I've clean it up, and it seems I had to do some importing:
 
 ```python
-import tkinter
-import time
-```
-I can at least run my application now:
-![tk nothing](../images/tk_nothing.png)
-
-But that doesn't work right?! OK, lets start debugging more. This next step is to leverage Granite-Code to
-tell me whats going on with the different functions. Go ahead and highlight any _one_ of them and run:
-`ctrl-L` or `command-L` to add it to the context window and ask granite-coder something like
-
-```
-what does this function do?
+# Install the tsfm library
+! pip install "tsfm_public[notebooks] @ git+https://github.com/ibm-granite/granite-tsfm.git@v0.2.9" -U
 ```
 
-![explain code](../images/explain_code.png)
+### Import Packages
 
-Pretty good right? It helped me understand what is actually happening with this and I do it with each
-function so I get a better understanding of what the program is doing.
+From `tsfm_public`, we use the TinyTimeMixer model, forecasting pipeline, and plotting function.
 
-Go ahead and walk through your version, see the logic, and who knows maybe it'll highlight why yours
-isn't working yet, or not, the next step will help you even more!
 
-## Automagicly creating tests!
 
-One of the most powerful/helping stream line your workflow as a developer is writing good tests
-around your code. It's a safety blanket to help make sure your custom code has a way to check for
-any adverse changes in a day, week, month, year down the line. Most people hate writing tests,
-turns out Granite-Code can do it for you!
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
 
-That function you recently put in the context window? How about you ask it this:
-
-```text
-write a pytest test for this function
+from tsfm_public import (
+    TinyTimeMixerForPrediction,
+    TimeSeriesForecastingPipeline,
+)
+from tsfm_public.toolkit.visualization import plot_predictions
 ```
 
-Now I got a good framework for a test here:
-![lazy pytest](../images/pytest_test.png)
+### Download the data
 
-Notice that it only knew about what is in the context, so yep I'll need to add `pip install pytest` to
-my project. I'll also need to create a new test file and integrate `pytest` into my project. But
-this highlights you not blindly taking from the AI, you need to put it _in_ your system.
+We'll work with a dataset of hourly electrical demand, generation by type, prices, and weather in Spain.
 
-Admittedly, if you have trouble building out tests though this is insanely powerful, and your
-futureself and team mates will be happy you've built these in.
+1. Download the energy_data.csv.zip [dataset file from Kaggle here.](https://www.kaggle.com/datasets/nicholasjhana/energy-consumption-generation-prices-and-weather)
+2. Edit the `DATA_FILE_PATH` below to point to the data file.
 
-Finally there are two other things we should mention before heading over to the next Lab. First,
-hopefully you've gotten your Game of Life working, if not, a lot of us are Python developers,
-raise your hand and one of us may be able to come help you out.
 
-## Automagically commenting your code
 
-Last but not least, there is a great auto comment code option that we'd be remiss not to mention,
-take a look at the next screen shot:
+```python
+DATA_FILE_PATH = "~/Downloads/energy_dataset.csv.zip"
+```
 
-![comment_code](../images/comment_code.png)
+### Specify time and output variables
 
-It does some amazing work for you code, and really finally, take a look at [this video](https://www.youtube.com/watch?v=V3Yq6w9QaxI) if you want a quick video of other neat https://continue.dev functions we didn't go over.
+We provide the names of the timestamp column and the target column to be predicted. The context length (in time steps) is set to match the pretrained model.
 
-On to the next lab!
 
-<img src="https://count.asgharlabs.io/count?p=/lab2_granite_workshop_page>
+```python
+timestamp_column = "time"
+target_columns = ["total load actual"]
+context_length = 512
+```
+
+### Read in the data
+
+We parse the csv into a pandas dataframe, filling in any null values, and create a single window containing `context_length` time points. We ensure the timestamp column is a datetime.
+
+
+```python
+# Read in the data from the downloaded file.
+input_df = pd.read_csv(
+  DATA_FILE_PATH,
+  parse_dates=[timestamp_column], # Parse the timestamp values as dates. 
+)
+
+# Fill NA/NaN values by propagating the last valid value.
+input_df = input_df.ffill()
+
+# Only use the last `context_length` rows for prediction.
+input_df = input_df.iloc[-context_length:,]
+
+# Show the last few rows of the dataset.
+input_df.tail()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time</th>
+      <th>generation biomass</th>
+      <th>generation fossil brown coal/lignite</th>
+      <th>generation fossil coal-derived gas</th>
+      <th>generation fossil gas</th>
+      <th>generation fossil hard coal</th>
+      <th>generation fossil oil</th>
+      <th>generation fossil oil shale</th>
+      <th>generation fossil peat</th>
+      <th>generation geothermal</th>
+      <th>...</th>
+      <th>generation waste</th>
+      <th>generation wind offshore</th>
+      <th>generation wind onshore</th>
+      <th>forecast solar day ahead</th>
+      <th>forecast wind offshore eday ahead</th>
+      <th>forecast wind onshore day ahead</th>
+      <th>total load forecast</th>
+      <th>total load actual</th>
+      <th>price day ahead</th>
+      <th>price actual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>35059</th>
+      <td>2018-12-31 19:00:00+01:00</td>
+      <td>297.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>7634.0</td>
+      <td>2628.0</td>
+      <td>178.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>277.0</td>
+      <td>0.0</td>
+      <td>3113.0</td>
+      <td>96.0</td>
+      <td>NaN</td>
+      <td>3253.0</td>
+      <td>30619.0</td>
+      <td>30653.0</td>
+      <td>68.85</td>
+      <td>77.02</td>
+    </tr>
+    <tr>
+      <th>35060</th>
+      <td>2018-12-31 20:00:00+01:00</td>
+      <td>296.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>7241.0</td>
+      <td>2566.0</td>
+      <td>174.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>280.0</td>
+      <td>0.0</td>
+      <td>3288.0</td>
+      <td>51.0</td>
+      <td>NaN</td>
+      <td>3353.0</td>
+      <td>29932.0</td>
+      <td>29735.0</td>
+      <td>68.40</td>
+      <td>76.16</td>
+    </tr>
+    <tr>
+      <th>35061</th>
+      <td>2018-12-31 21:00:00+01:00</td>
+      <td>292.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>7025.0</td>
+      <td>2422.0</td>
+      <td>168.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>286.0</td>
+      <td>0.0</td>
+      <td>3503.0</td>
+      <td>36.0</td>
+      <td>NaN</td>
+      <td>3404.0</td>
+      <td>27903.0</td>
+      <td>28071.0</td>
+      <td>66.88</td>
+      <td>74.30</td>
+    </tr>
+    <tr>
+      <th>35062</th>
+      <td>2018-12-31 22:00:00+01:00</td>
+      <td>293.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>6562.0</td>
+      <td>2293.0</td>
+      <td>163.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>287.0</td>
+      <td>0.0</td>
+      <td>3586.0</td>
+      <td>29.0</td>
+      <td>NaN</td>
+      <td>3273.0</td>
+      <td>25450.0</td>
+      <td>25801.0</td>
+      <td>63.93</td>
+      <td>69.89</td>
+    </tr>
+    <tr>
+      <th>35063</th>
+      <td>2018-12-31 23:00:00+01:00</td>
+      <td>290.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>6926.0</td>
+      <td>2166.0</td>
+      <td>163.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>287.0</td>
+      <td>0.0</td>
+      <td>3651.0</td>
+      <td>26.0</td>
+      <td>NaN</td>
+      <td>3117.0</td>
+      <td>24424.0</td>
+      <td>24455.0</td>
+      <td>64.27</td>
+      <td>69.88</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 29 columns</p>
+</div>
+
+
+
+### Plot the target series
+
+Here we inspect a preview of the target time series column.
+
+
+```python
+fig, axs = plt.subplots(len(target_columns), 1, figsize=(10, 2 * len(target_columns)), squeeze=False)
+for ax, target_column in zip(axs, target_columns):
+    ax[0].plot(input_df[timestamp_column], input_df[target_column])
+```
+
+
+    
+![png](Time_Series_Getting_Started_files/Time_Series_Getting_Started_12_0.png)
+    
+
+
+### Set up zero shot model
+The TTM model is hosted on [HuggingFace](https://huggingface.co/ibm-granite/granite-timeseries-ttm-v1), and is retrieved by the wrapper, `TinyTimeMixerForPrediction`. We have one input channel in this example.
+
+
+```python
+# Instantiate the model.
+zeroshot_model = TinyTimeMixerForPrediction.from_pretrained(
+  "ibm-granite/granite-timeseries-ttm-v1", # Name of the model on HuggingFace.
+  num_input_channels=len(target_columns) # tsp.num_input_channels,
+)
+```
+
+### Create a forecasting pipeline
+
+Set up the forecasting pipeline with the model, setting `frequency` given our knowledge of the sample frequency. In this example we set `explode_forecasts` to `True`, which will format the output for plotting the history and prediction period. We then make a forecast on the dataset.
+
+
+```python
+# Create a pipeline.
+pipeline = TimeSeriesForecastingPipeline(
+    zeroshot_model,
+    timestamp_column=timestamp_column,
+    id_columns=[],
+    target_columns=target_columns,
+    explode_forecasts=True,
+    freq="h",
+    device="cpu", # Specify your local GPU or CPU.
+)
+
+# Make a forecast on the target column given the input data.
+zeroshot_forecast = pipeline(input_df)
+zeroshot_forecast.tail()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time</th>
+      <th>total load actual_prediction</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>91</th>
+      <td>2019-01-04 19:00:00+01:00</td>
+      <td>31888.007812</td>
+    </tr>
+    <tr>
+      <th>92</th>
+      <td>2019-01-04 20:00:00+01:00</td>
+      <td>31953.996094</td>
+    </tr>
+    <tr>
+      <th>93</th>
+      <td>2019-01-04 21:00:00+01:00</td>
+      <td>31226.650391</td>
+    </tr>
+    <tr>
+      <th>94</th>
+      <td>2019-01-04 22:00:00+01:00</td>
+      <td>29632.423828</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>2019-01-04 23:00:00+01:00</td>
+      <td>27261.152344</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+### Plot predictions along with the historical data.
+
+The predicted series picks up where the historical data ends, and we can see that it predicts a continuation of the cyclical pattern and an upward trend.
+
+
+```python
+# Plot the historical data and predicted series.
+plot_predictions(
+    input_df=input_df,
+    exploded_predictions_df=zeroshot_forecast,
+    freq="h",
+    timestamp_column=timestamp_column,
+    channel=target_column,
+    indices=[-1],
+    num_plots=1,
+)
+```
+
+
+    
+![png](Time_Series_Getting_Started_files/Time_Series_Getting_Started_18_0.png)
+    
 
