@@ -1,10 +1,13 @@
 # Retrieval Augmented Generation (RAG) with Langchain
+
 *With IBM Granite Models*
 
 ## In this notebook
+
 This notebook contains instructions for performing Retrieval Augumented Generation (RAG). RAG is an architectural pattern that can be used to augment the performance of language models by recalling factual information from a knowledge base, and adding that information to the model query. The most common approach in RAG is to create dense vector representations of the knowledge base in order to retrieve text chunks that are semantically similar to a given user query.
 
 RAG use cases include:
+
 - Customer service: Answering questions about a product or service using facts from the product documentation.
 - Domain knowledge: Exploring a specialized domain (e.g., finance) using facts from papers or articles in the knowledge base.
 - News chat: Chatting about current events by calling up relevant recent news articles.
@@ -21,7 +24,6 @@ In its simplest form, RAG requires 3 steps:
 
 Ensure you are running python 3.10 in a freshly-created virtual environment.
 
-
 ```python
 import sys
 assert sys.version_info >= (3, 10) and sys.version_info < (3, 11), "Use Python 3.10 to run this notebook."
@@ -31,13 +33,11 @@ assert sys.version_info >= (3, 10) and sys.version_info < (3, 11), "Use Python 3
 
 Install the dependencies in one `pip` command, so that pip's dependency resolver can include them all.
 
-
 ```python
 ! pip install \
   "git+https://github.com/ibm-granite-community/utils.git" \
   "wget"
 ```
-
 
 ```python
 from ibm_granite_community.langchain_utils import find_langchain_model, find_langchain_vector_db
@@ -51,7 +51,6 @@ Specify the model to use for generating embedding vectors from text.
 
 To use a model from a provider other than Huggingface, replace this code cell with one from [this Embeddings Model recipe](https://github.com/ibm-granite-community/utils/blob/main/recipes/Components/Langchain_Embeddings_Models.ipynb).
 
-
 ```python
 from langchain_huggingface import HuggingFaceEmbeddings
 embeddings_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
@@ -62,7 +61,6 @@ embeddings_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 Specify the database to use for storing and retrieving embedding vectors.
 
 To connect to a vector database other than Milvus substitute this code cell with one from [this Vector Store recipe](https://github.com/ibm-granite-community/utils/blob/main/recipes/Components/Langchain_Vector_Stores.ipynb).
-
 
 ```python
 from langchain_milvus import Milvus
@@ -75,10 +73,10 @@ vector_db = Milvus(embedding_function=embeddings_model, connection_args={"uri": 
 ```
 
 ### Choose your LLM
+
 Specify the model that will be used for inferencing, given a query and the retrieved text.
 
 To connect to a model on a provider other than Replicate, substitute this code cell with one from [this LLM component recipe](https://github.com/ibm-granite-community/utils/blob/main/recipes/Components/Langchain_LLMs.ipynb).
-
 
 ```python
 from langchain_community.llms import Replicate
@@ -98,7 +96,6 @@ In this example, we take the State of the Union speech text, split it into chunk
 
 Here we use President Biden's State of the Union address from March 1, 2022.
 
-
 ```python
 import os, wget
 
@@ -112,7 +109,6 @@ if not os.path.isfile(filename):
 ### Split the document into chunks
 
 Split the document into text segments that can fit into the model's context window.
-
 
 ```python
 from langchain.document_loaders import TextLoader
@@ -128,7 +124,6 @@ texts = text_splitter.split_documents(documents)
 
 NOTE: Population of the vector database may take over a minute depending on your embedding model and service.
 
-
 ```python
 # vector_db = vector_db_class.from_documents(texts, embeddings)
 vector_db.add_documents(texts)
@@ -139,7 +134,6 @@ vector_db.add_documents(texts)
 ### Conduct a similarity search
 
 Search the database for similar documents by proximity of the embedded vector in vector space.
-
 
 ```python
 query = "What did the president say about Ketanji Brown Jackson"
@@ -153,7 +147,6 @@ print(docs[0].page_content)
 
 Build a question-answering chain with the model and the document retriever.
 
-
 ```python
 from langchain.chains import RetrievalQA
 
@@ -162,8 +155,7 @@ qa = RetrievalQA.from_chain_type(llm=model, chain_type="stuff", retriever=vector
 
 ### Generate a retrieval-augmented response to a question
 
-Use the question-answering chain to process the query. 
-
+Use the question-answering chain to process the query.
 
 ```python
 query = "What did the president say about Ketanji Brown Jackson"

@@ -6,7 +6,7 @@ site_author: IBM Research
 # Repository
 repo_name: granite-workshop
 repo_url: https://github.com/ibm/granite-workshop
-edit_uri: edit/master/docs
+edit_uri: edit/main/docs
 
 # Navigation
 nav:
@@ -21,7 +21,7 @@ nav:
     - Additional Resources: resources/RESOURCES.md
     - MkDocs Cheatsheet: resources/MKDOCS.md
 
-    
+
 ## DO NOT CHANGE BELOW THIS LINE
 
 # Copyright

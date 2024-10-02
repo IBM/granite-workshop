@@ -1,6 +1,5 @@
 # Generating Bash Code with Granite Code and Ollama
 
-
 > **NOTE:** This recipe assumes you are working on a Linux, MacOS, or other UNIX-compatible system. While we haven't tested on Windows, some of the examples may generate valid DOS or PowerShell output. See comments below.
 
 ### Prerequisite: Install Ollama and Granite Code models
@@ -20,23 +19,19 @@ ollama pull granite-code:20b
 >
 > Change the value in the next cell if you decide to use the `8b` or `20b` model.
 
-
 ```python
 default_model = 'granite-code:3b'  # The `8b` and `20b` models work better!
 ```
 
-
 ```python
 !pip install ollama
 ```
-
 
 ## One-shot Prompt with Granite Code 3b
 
 In One-shot prompting, you provide the model with a question and no examples. The model will generate an answer given its training. Larger models tend to do better at this task.
 
 Use the [ollama-python package](https://github.com/ollama/ollama-python) to access the model.
-
 
 ```python
 import ollama
@@ -45,9 +40,9 @@ import ollama
 Let's write two helper functions that we'll use for all our queries. First, we'll find it useful to determine the name of our operating system and use that string in queries. This is because shell commands sometimes have different options on Linux vs. MacOS, etc. We'll write our queries so they take this difference into account. Note that `platform.system()` returns `Windows` on Windows system.
 
 > **TIPS:** If you are using MacOS, you can install Linux-compatible versions of many commands. Consider these two options:
+>
 > * Install GNU Coreutils on a Mac. See [these instructions](https://superuser.com/questions/476575/replace-os-xs-shell-commands-with-the-linux-versions).
 > * Install [HomeBrew](https://brew.sh/) and use it to install Linux-compatible (and other) tools.
-
 
 ```python
 import platform
@@ -64,18 +59,16 @@ def os_name():
     return name_map.get(os_name, os_name), shell_map.get(os_name, 'bash')
 ```
 
-
 ```python
 my_os, my_shell = os_name()
 print(f"My OS is {my_os}. My shell is {my_shell}.")
 ```
 
-Now let's write a helper function for running queries, wrapping the Ollama `generate()` API call. The user specifies the prompt and a model name, which defaults to the value of `default_model` defined above. 
+Now let's write a helper function for running queries, wrapping the Ollama `generate()` API call. The user specifies the prompt and a model name, which defaults to the value of `default_model` defined above.
 
 Note how we add additional context to the user's input prompt, such as _"make sure you write code that works for _my_ system!"_ (We'll see another way to do this below.)
 
 The reason we print the result, then return it, is to get nicely readable output.
-
 
 ```python
 def query(prompt: str, model: str = default_model) -> str:
@@ -88,7 +81,6 @@ def query(prompt: str, model: str = default_model) -> str:
     print(result)
     return result
 ```
-
 
 ```python
 result1 = query(f"""
@@ -109,13 +101,10 @@ The `%%bash` "magic" tells Jupyter to run the commands as a shell script instead
 
 Does the script work? If not try running the query again. Also try modifying the query string. What difference do these steps make?
 
-
 ```bash
 %%bash
 ls -l
 ```
-
-We explore execution of generated shell code in the next recipe we recommend you study after this one, [../Text_to_Shell_Exec](../Text_to_Shell_Exec/Text_to_Shell_Exec.ipynb).
 
 ## Few-shot Prompting with Granite Code 3b
 
@@ -125,14 +114,12 @@ One of the examples uses the `stat` command, which requires different syntax for
 
 > **NOTE:** If you are using a Windows system, try changing the "answers" in the `examples` cell to be valid Power Shell or DOS commands. You can ignore the `stat_flags` in the next cell.
 
-
 ```python
 stat_flags = '-c "%y %n" {}'
 if my_os == 'MacOS':
     stat_flags = '-f "%m %N" {}'
 print(f"The 'stat' flags for my OS \'{my_os}\' and shell \'{my_shell}\' are \'{stat_flags}\'")
 ```
-
 
 ```python
 examples = f"""
@@ -166,7 +153,6 @@ find . -type d -empty
 
 Let's define another helper function for calling `ollama.chat()`. Why it is called `chat1()` will be explained below.
 
-
 ```python
 def chat1(prompt: str, examples: str = examples, model: str ='granite-code:3b') -> str:
     user_prompt = f"""
@@ -187,7 +173,6 @@ def chat1(prompt: str, examples: str = examples, model: str ='granite-code:3b') 
     return result
 ```
 
-
 ```python
 result2 = chat1(f"""
     Show me a {my_shell} script to print the first 50 files found under the current working directory
@@ -203,10 +188,9 @@ Here we define a `default_system_prompt` to let the model know what we expect fr
 
 So, let's define a final helper function, `chat()`, that includes a system prompt, where `default_system_prompt` is the default. Also, note that we move the sentence `Make sure you only generate {shell} code that is {os}-compatible!` to the system prompt, where it really belongs!
 
-
 ```python
 default_system_prompt = f"""
-    You are a helpful software engineer. You write clear, concise, well-commented code. 
+    You are a helpful software engineer. You write clear, concise, well-commented code.
     Make sure you only generate {my_shell} code that is {my_os}-compatible!
     """
 
@@ -235,7 +219,6 @@ def chat(prompt: str,
     print(result)
     return result
 ```
-
 
 ```python
 result3 = chat(f"""
