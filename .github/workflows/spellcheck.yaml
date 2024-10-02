@@ -42,7 +42,7 @@ jobs:
           source venv/bin/activate
           python3 -m pip install 'pyspelling'
 
-      - name: 'Build website'
+      - name: 'Check spelling'
         run: |
           source venv/bin/activate
           python3 -m pyspelling --config .spellcheck.yml --spellchecker aspell
