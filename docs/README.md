@@ -30,12 +30,11 @@ The introductory page of the workshop is broken down into the following sections
 | [Lab 2: Granite Timeseries Cookbook](lab-2/README.md) | Energy Demand Forecasting with Granite Timeseries (TTM) |
 | [Lab 3: RAG with LangChain](lab-3/README.md)| Retrieval Augmented Generation (RAG) with Langchain using Granite|
 
-
 ## Compatibility
 
 This workshop has been tested on the following platforms:
 
-XXXXXXXXXXXXXXXX
+TBD
 
 ## Credits
 
