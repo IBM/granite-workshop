@@ -5,7 +5,7 @@ site_author: IBM Research
 
 # Repository
 repo_name: granite-workshop
-repo_url: https://github.com/ibm/granite-workshop
+repo_url: https://github.com/IBM/granite-workshop
 edit_uri: edit/main/docs
 
 # Navigation
@@ -18,8 +18,8 @@ nav:
     - Lab 2. Time Series Analysis with Granite: lab-2/README.md
     - Lab 3. RAG with Langchain using Granite: lab-3/README.md
   - References:
-    - Additional Resources: resources/RESOURCES.md
-    - MkDocs Cheatsheet: resources/MKDOCS.md
+    - IBM Granite Community: https://github.com/ibm-granite-community
+    - IBM Granite: https://www.ibm.com/granite
 
 
 ## DO NOT CHANGE BELOW THIS LINE
@@ -49,6 +49,8 @@ theme:
 plugins:
   - search
   - social
+  - macros:
+      on_undefined: strict
 
 # Customization
 extra:
@@ -63,6 +65,7 @@ extra:
       link: https://www.youtube.com/user/developerworks
     - icon: fontawesome/brands/dev
       link: https://dev.to/ibmdeveloper
+  colab_url: https://colab.research.google.com/github/IBM/granite-workshop
 
 # Extensions
 markdown_extensions:
