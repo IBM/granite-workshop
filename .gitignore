@@ -86,3 +86,4 @@ Session.vim
 tags
 venv*
 dictionary.dic
+.ipynb_checkpoints/

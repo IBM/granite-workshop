@@ -14,12 +14,11 @@ nav:
     - About the workshop: README.md
   - Workshop:
     - Lab 0. Pre-work: pre-work/README.md
-    - Lab 1. Coding with Granite: lab-1/README.md
-    - Lab 2. Time Series Analysis with Granite: lab-2/README.md
-    - Lab 3. RAG with Langchain using Granite: lab-3/README.md
+    - Lab 1. Generating Bash Code with Granite Code: lab-1/README.md
+    - Lab 2. Retrieval Augmented Generation (RAG) with Langchain: lab-2/README.md
+    - Lab 3. Energy Demand Forecasting with Granite Timeseries (TTM): lab-3/README.md
   - References:
     - IBM Granite Community: https://github.com/ibm-granite-community
-    - IBM Granite: https://www.ibm.com/granite
 
 
 ## DO NOT CHANGE BELOW THIS LINE
@@ -99,7 +98,8 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-  - pymdownx.tabbed
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
