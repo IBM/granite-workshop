@@ -12,7 +12,7 @@ on:
       - 'docs/**'
       - 'notebooks/**'
       - 'mkdocs.yml'
-      - '.github/workflows/mkdocs.yml' # This workflow
+      - '.github/workflows/publish.yml' # This workflow
   workflow_dispatch:
 
 env:
