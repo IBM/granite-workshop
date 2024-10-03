@@ -2,7 +2,9 @@ Augumented
 BJ
 cd
 CLI
+colab
 Colab
+config
 Coreutils
 csv
 dataframe
@@ -11,11 +13,13 @@ datetime
 embeddings
 Embeddings
 Hargrave
+Homebrew
 Huggingface
 ibm
 ImageMagick
 inferencing
 InstructLab
+ipynb
 jupyter
 Jupyter
 Kaggle
@@ -40,5 +44,6 @@ tsfm
 TSFM
 TTM
 TTMs
+url
 venv
 Zhao
