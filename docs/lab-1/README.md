@@ -6,8 +6,8 @@ Please follow the instructions in [pre-work](../pre-work/README.md)
 
 ## Lab
 
-[Lab 1: Generating Bash Code with Granite Code and Ollama](./Text_to_Shell.ipynb)
-   <a target="_blank" href="https://colab.research.google.com/github/IBM/granite-workshop/blob/main/docs/lab-1/Text_to_Shell.ipynb">
+[Lab 1: Generating Bash Code with Granite Code and Ollama](../../notebooks/Text_to_Shell.ipynb)
+   <a target="_blank" href="https://colab.research.google.com/github/IBM/granite-workshop/blob/main/notebooks/Text_to_Shell.ipynb">
    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
    </a>
 

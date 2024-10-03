@@ -35,7 +35,7 @@ The introductory page of the workshop is broken down into the following sections
 
 ## Technology Used
 
-The technology used in the worksop is as follows:
+The technology used in the workshop is as follows:
 
 * [Google Colab](https://colab.google/)
 * [Granite AI foundation models](https://www.ibm.com/granite)

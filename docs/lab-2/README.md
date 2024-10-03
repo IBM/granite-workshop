@@ -6,8 +6,8 @@ Please follow the instructions in [pre-work](../pre-work/README.md)
 
 ## Lab
 
-[Lab 2: Retrieval Augmented Generation (RAG) with Langchain](./RAG_with_Langchain.ipynb)
-   <a target="_blank" href="https://colab.research.google.com/github/IBM/granite-workshop/blob/main/docs/lab-2/RAG_with_Langchain.ipynb">
+[Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../../notebooks/RAG_with_Langchain.ipynb)
+   <a target="_blank" href="https://colab.research.google.com/github/IBM/granite-workshop/blob/main/notebooks/RAG_with_Langchain.ipynb">
    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
    </a>
 

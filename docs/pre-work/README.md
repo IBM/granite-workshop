@@ -26,7 +26,7 @@ cd granite-workshop
 
 ### Running Granite model on Ollama
 
-[Lab 1: Generating Bash Code with Granite Code and Ollama](lab-1/README.md)and [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](lab-2/README.md) require Granite models to be served by a AI model runtime so that the models can be inferred or called. The workshop uses [Ollama](https://github.com/ollama/ollama) to serve the models. The subsection that follows shows how to setup Ollama on your computer.
+[Lab 1: Generating Bash Code with Granite Code and Ollama](../lab-1/README.md) and [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) require Granite models to be served by a AI model runtime so that the models can be inferred or called. The workshop uses [Ollama](https://github.com/ollama/ollama) to serve the models. The subsection that follows shows how to setup Ollama on your computer.
 
 #### Running Ollama Locally (Linux, MacOS, Windows)
 
@@ -44,7 +44,7 @@ ollama pull granite-code:20b
 
 > **Note: Before installing dependencies and to avoid conflicts in your environment, it is advisable to use a [virtual environment(venv)](https://docs.python.org/3/library/venv.html).**
 >
-> Create virutal environment:
+> Create virtual environment:
 >
 > ```shell
 > python -m venv .venv
@@ -83,11 +83,11 @@ Running the lab notebooks remotely using [Google Colab](https://colab.google/) r
 
 ### Running Granite model on Ollama
 
-[Lab 1: Generating Bash Code with Granite Code and Ollama](lab-1/README.md)and [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](lab-2/README.md) require Granite models to be served by a AI model runtime so that the models can be inferred or called. The workshop uses [Ollama](https://github.com/ollama/ollama) to serve the models. The subsection that follows shows how to setup Ollama in notebook on Colab.
+[Lab 1: Generating Bash Code with Granite Code and Ollama](../lab-1/README.md) and [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) require Granite models to be served by a AI model runtime so that the models can be inferred or called. The workshop uses [Ollama](https://github.com/ollama/ollama) to serve the models. The subsection that follows shows how to setup Ollama in notebook on Colab.
 
 #### Running Ollama in Notebook
 
-> **Note:** The steps that follow need to be run in separate cells in the Jupyter notebooks of [Lab 1: Generating Bash Code with Granite Code and Ollama](lab-1/README.md)and [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](lab-2/README.md), before starting the labs.
+> **Note:** The steps that follow need to be run in separate cells in the Jupyter notebooks of [Lab 1: Generating Bash Code with Granite Code and Ollama](../lab-1/README.md) and [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md), before starting the labs.
 
 1. Download and install Ollama, if you haven't already:
 

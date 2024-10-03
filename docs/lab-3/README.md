@@ -6,8 +6,8 @@ Please follow the instructions in [pre-work](../pre-work/README.md)
 
 ## Lab
 
-[Lab 3: Energy Demand Forecasting with Granite Timeseries (TTM)](./Time_Series_Getting_Started.ipynb)
-   <a target="_blank" href="https://colab.research.google.com/github/IBM/granite-workshop/blob/main/docs/lab-3/Time_Series_Getting_Started.ipynb">
+[Lab 3: Energy Demand Forecasting with Granite Timeseries (TTM)](../../notebooks/Time_Series_Getting_Started.ipynb)
+   <a target="_blank" href="https://colab.research.google.com/github/IBM/granite-workshop/blob/main/notebooks/Time_Series_Getting_Started.ipynb">
    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
    </a>
 
