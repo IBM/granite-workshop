@@ -1,110 +1,111 @@
 # Pre-work
 
-This section will give you InstructLab background as well as guide you through the necessary prerequisites and installations
-
-## Background
-
-#### What is an LLM?
-
-Large language models (LLMs) are a category of foundation models trained on immense amounts of data making them capable of
-understanding and generating natural language and other types of content to perform a wide range of tasks.
-
-##### Granite
-
-Granite is a family of IBM artificial intelligence (AI) models built for business, to help drive trust and scalability in AI-driven applications.
-
-#### Why should you use Granite?
-
-TBD
+The labs in the workshop are [Jupyter notebooks](https://jupyter.org/). The notebooks can be run on your computer or remotely on [Google Colab](https://colab.google/). Follow the instructions in the section that follow on how you would like to run the notebooks.
 
 ## Running the Granite Notebooks Locally
 
-How to run the Granite Jupyter notebooks on your computer.
+Running the lab notebooks locally on your computer require the following setup:
 
-## Clone the Granite Workshop Repository
+- [Pre-requisite](#pre-requisite)
+- [Clone the Granite Workshop Repository](#clone-the-granite-workshop-repository)
+- [Running Granite model on Ollama](#running-granite-model-on-ollama)
+
+### Pre-requisite
+
+- Pip
+- Python 3.10
+
+### Clone the Granite Workshop Repository
 
 Clone the repo and cd into the repo directory.
 
-```python
+```shell
 git clone git@github.com:IBM/granite-workshop.git
-
 cd granite-workshop
 ```
 
-## Create and Activate a Virtual Environment
+### Running Granite model on Ollama
 
-Use a [python virtual environment](https://docs.python.org/3/library/venv.html) for installed libraries. Open a terminal, and from the command line, run:
+[Lab 1: Generating Bash Code with Granite Code and Ollama](../lab-1/README.md) and [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) require Granite models to be served by a AI model runtime so that the models can be inferred or called. The workshop uses [Ollama](https://github.com/ollama/ollama) to serve the models. The subsection that follows shows how to setup Ollama on your computer.
 
-```python
-python -m venv .venv
+#### Running Ollama Locally (Linux, MacOS, Windows)
+
+1. [Download and install Ollama](https://github.com/ollama/ollama?tab=readme-ov-file#ollama), if you haven't already.
+1. Start the Ollama server: `ollama serve`
+1. Pull down Granite models:
+
+```shell
+ollama pull granite-code:3b
+ollama pull granite-code:8b
+ollama pull granite-code:20b
 ```
 
-Activate the virtual environment in the by running:
+### Install Jupyter
 
-```python
-source ./.venv/bin/activate
-```
+> **Note: Before installing dependencies and to avoid conflicts in your environment, it is advisable to use a [virtual environment(venv)](https://docs.python.org/3/library/venv.html).**
+>
+> Create virtual environment:
+>
+> ```shell
+> python -m venv .venv
+>```
+>
+>Activate the virtual environment in the by running:
+>
+>```shell
+> source ./.venv/bin/activate
+>```
 
-## Install and Run Jupyter
+Install Jupyter notebook with pip in the virtual environment:
 
-For more detail, see the installation Instructions at [Jupyter.org](https://jupyter.org/install)
-
-Install jupyter notebook with pip in the virtual environment:
-
-```python
+```shell
 pip install notebook
 ```
 
-## Open a Recipe in Jupyter Notebook
+For more detail, see the installation Instructions at [Jupyter.org](https://jupyter.org/install)
 
-To open a recipe notebook in jupyter, from the virtual environment, run:
+> **Note:** To open a notebook in Jupyter (from the virtual environment), run:
+>
+> ```shell
+> jupyter notebook <notebook-file-path>
+> ```
 
-```jupyter notebook <recipe-notebook-file-path>```
+## Running the Granite Notebooks Remotely (Colab)
 
-To run the "Text to Shell" recipe from the repository root, for example:
+Running the lab notebooks remotely using [Google Colab](https://colab.google/) require the following setup:
+
+- [Pre-requisite](#pre-requisite-1)
+- [Running Granite model on Ollama](#running-granite-model-on-ollama-1)
+
+### Pre-requisite
+
+- [Google Colab](https://colab.google/) requires a Google account that you're logged into
+
+### Running Granite model on Ollama
+
+[Lab 1: Generating Bash Code with Granite Code and Ollama](../lab-1/README.md) and [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) require Granite models to be served by a AI model runtime so that the models can be inferred or called. The workshop uses [Ollama](https://github.com/ollama/ollama) to serve the models. The subsection that follows shows how to setup Ollama in notebook on Colab.
+
+#### Running Ollama in Notebook
+
+> **Note:** The steps that follow need to be run in separate cells in the Jupyter notebooks of [Lab 1: Generating Bash Code with Granite Code and Ollama](../lab-1/README.md) and [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md), before starting the labs.
+
+1. Download and install Ollama, if you haven't already:
+
+```shell
+!curl https://ollama.ai/install.sh | sh
+```
+
+1. Start the Ollama server using `nohup` and `&` will run the server in the background:
 
 ```python
-jupyter notebook ./notebooks/Text_to_Shell/Text_to_Shell.ipynb
+import os
+os.system("nohup ollama serve &")
 ```
 
-You should see the notebook in your browser now!
+1. Pull down Granite models:
 
-## Extra: Jupyter Lab
-
-[Jupyter Lab](https://jupyter.org/try-jupyter/lab/) provides a web-based notebook IDE, for interactive development of Jupyter notebooks.
-
-```python
-
-##### Download via the Ollama website
-
-[Download Ollama](https://ollama.com/download/Ollama-darwin.zip) via the website.
-
-Unzip the folder, and move the Ollama app to your applications folder.
-
-##### Terminal Installation
-
-Open up a terminal, and install [homebrew](https://brew.sh/).
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```shell
+!ollama pull granite-code:3b
+!ollama pull granite-code:8b
+!ollama pull granite-code:20b
 ```
-
-After the installation is complete, install [ollama](https://ollama.com) via `brew`.
-
-```bash
-brew install ollama
-```
-
-Next, start up ollama from a terminal window:
-
-```bash
-ollama serve
-```
-
-And leave that terminal window running for the rest of the labs.
-
-### Windows installation steps
-
-Install ollama via the website [here](https://ollama.com/download/windows).
-
-With this you should have the knowledge and applications you need, so let's start the workshop!

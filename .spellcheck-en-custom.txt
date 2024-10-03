@@ -1,6 +1,8 @@
 Augumented
+BJ
 cd
 CLI
+Colab
 Coreutils
 csv
 dataframe
@@ -8,6 +10,7 @@ dataset
 datetime
 embeddings
 Embeddings
+Hargrave
 Huggingface
 ibm
 ImageMagick
@@ -26,6 +29,7 @@ pre
 Pre
 pretrained
 repo
+runtime
 scalability
 TBD
 tbody
@@ -36,3 +40,5 @@ tsfm
 TSFM
 TTM
 TTMs
+venv
+Zhao
