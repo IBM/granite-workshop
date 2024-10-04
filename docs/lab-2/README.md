@@ -19,6 +19,12 @@ This lab is a [Jupyter notebooks](https://jupyter.org/). Please follow the instr
 [Retrieval Augmented Generation (RAG) with Langchain notebook]({{ config.repo_url }}/blob/{{ git.commit }}/notebooks/RAG_with_Langchain.ipynb "View in GitHub"){:target="_blank"}
 [![Retrieval Augmented Generation (RAG) with Langchain notebook](https://colab.research.google.com/assets/colab-badge.svg "Open In Colab")]({{ extra.colab_url }}/blob/{{ git.commit }}/notebooks/RAG_with_Langchain.ipynb){:target="_blank"}
 
+To run the notebook from your command line in Jupyter using the active virtual environment from the [pre-work](../pre-work/README.md#install-jupyter), run:
+
+```shell
+jupyter notebook notebooks/RAG_with_Langchain.ipynb
+```
+
 ## Credits
 
 This notebook is a modified version of the IBM Granite Community [Retrieval Augmented Generation (RAG) with Langchain](https://github.com/ibm-granite-community/granite-snack-cookbook/blob/main/recipes/RAG/RAG_with_Langchain.ipynb) notebook. Refer to the [IBM Granite Community](https://github.com/ibm-granite-community) for the official notebooks.
