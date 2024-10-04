@@ -6,9 +6,13 @@ logo: images/ibm-blue-background.png
 
 # Energy Demand Forecasting with Granite Timeseries (TTM)
 
+[Forecasting](https://www.ibm.com/think/topics/forecasting) in time series analysis allows data scientists to identify patterns by using machine learning and then generate forecasts about the future. [TinyTimeMixers (TTMs)](https://arxiv.org/abs/2401.03955) are compact pre-trained models for Multivariate Time-Series Forecasting.
+
+The goal of this lab is to show how you can predict future trends on historical data using the [IBM Granite Time Series](https://www.ibm.com/granite/docs/models/time-series/) models.
+
 ## Pre-requisite
 
-Please follow the instructions in [pre-work](../pre-work/README.md)
+This lab is a [Jupyter notebooks](https://jupyter.org/). Please follow the instructions in [pre-work](../pre-work/README.md) to run the lab.
 
 ## Lab
 

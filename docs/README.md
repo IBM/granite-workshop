@@ -13,7 +13,7 @@ demonstrates the value of [generative AI](https://developer.ibm.com/generative-a
 By the end of this workshop, you will be able to:
 
 * Generate programming code ([Bash](https://opensource.com/resources/what-bash)) by [prompting](https://en.wikipedia.org/wiki/Prompt_engineering) a code model
-* Generate specific information from large document using the [RAG](https://research.ibm.com/blog/retrieval-augmented-generation-RAG) technique
+* Generate specific information from a large document using the [RAG](https://research.ibm.com/blog/retrieval-augmented-generation-RAG) technique
 * Predict future trends using [time series forecasting](https://research.ibm.com/blog/AI-time-series-forecasting)
 
 ### About this workshop
@@ -31,7 +31,7 @@ The introductory page of the workshop is broken down into the following sections
 | [Lab 0: Pre-work](pre-work/README.md)  | Pre-work for the workshop |
 | [Lab 1: Generating Bash Code with Granite Code](lab-1/README.md) | Learn how to use an AI model to generate programming code |
 | [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](lab-2/README.md)| Learn how to generate specific information from a large document |
-| [Lab 3: Energy Demand Forecasting with Granite Timeseries (TTM)](lab-3/README.md) | Learn how to Predict future trends using time series forecasting |
+| [Lab 3: Energy Demand Forecasting with Granite Timeseries (TTM)](lab-3/README.md) | Learn how to predict future trends using time series forecasting |
 
 ## Technology Used
 
