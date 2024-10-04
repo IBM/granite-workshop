@@ -17,11 +17,12 @@ Running the lab notebooks locally on your computer requires the following steps:
 - [Local Prerequisites](#local-prerequisites)
 - [Clone the Granite Workshop Repository](#clone-the-granite-workshop-repository)
 - [Running Ollama Locally](#running-ollama-locally)
+- [Install Jupyter](#install-jupyter)
 
 ### Local Prerequisites
 
 - Git
-- Python 3.10, 3.11, or 3.12
+- Python 3.10
 
 ### Clone the Granite Workshop Repository
 
@@ -121,4 +122,5 @@ Running the lab notebooks remotely using [Google Colab](https://colab.google/) r
     ```shell
     !ollama pull granite-code:3b
     !ollama pull granite-code:8b
+    !ollama pull granite-code:20b
     ```
