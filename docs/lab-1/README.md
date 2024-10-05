@@ -19,6 +19,12 @@ This lab is a [Jupyter notebooks](https://jupyter.org/). Please follow the instr
 [Generating Bash Code with Granite Code notebook]({{ config.repo_url }}/blob/{{ git.commit }}/notebooks/Text_to_Shell.ipynb "View in GitHub"){:target="_blank"}
 [![Generating Bash Code with Granite Code notebook](https://colab.research.google.com/assets/colab-badge.svg "Open In Colab")]({{ extra.colab_url }}/blob/{{ git.commit }}/notebooks/Text_to_Shell.ipynb){:target="_blank"}
 
+To run the notebook from your command line in Jupyter using the active virtual environment from the [pre-work](../pre-work/README.md#install-jupyter), run:
+
+```shell
+jupyter notebook notebooks/Text_to_Shell.ipynb
+```
+
 ## Credits
 
 This notebook is a modified version of the IBM Granite Community [Generating Bash Code with Granite Code](https://github.com/ibm-granite-community/granite-code-cookbook/blob/main/recipes/Text_to_Shell/Text_to_Shell.ipynb) notebook. Refer to the [IBM Granite Community](https://github.com/ibm-granite-community) for the official notebooks.

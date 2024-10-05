@@ -101,26 +101,27 @@ Running the lab notebooks remotely using [Google Colab](https://colab.google/) r
 
 ### Running Ollama in Colab
 
-!!! note "Adding cells to notebook"
-    The steps that follow need to be run in separate cells at the beginning of the Jupyter notebooks of [Lab 1: Generating Bash Code with Granite Code and Ollama](../lab-1/README.md) and [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md), before proceeding with the remaining cells.
+!!! note "Limitations"
+    Running the Ollama server in Colab will limit the size of Granite models you can use and be _significantly_ slower when calling the Granite models.
 
-1. Download and install Ollama
+The Jupyter notebooks for [Lab 1: Generating Bash Code with Granite Code and Ollama](../lab-1/README.md) and [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) include cells for the following steps that  need to be run before proceeding with the remainder of the notebook.
+
+1. Download and install Ollama in Colab
 
     ```shell
     !curl https://ollama.ai/install.sh | sh
     ```
 
-1. Start the Ollama server as a background process using `nohup` and `&`
+1. Start the Ollama server as a background process in Colab using `nohup` and `&`
 
     ```python
     import os
     os.system("nohup ollama serve &")
     ```
 
-1. Pull down the Granite models you will want to use in the workshop. Larger models take more memory to run.
+1. Pull down the Granite models in Colab that you will use in the workshop. Larger models take more memory to run. The `granite-code:20b` model is too large for the Colab runtime environment.
 
     ```shell
     !ollama pull granite-code:3b
     !ollama pull granite-code:8b
-    !ollama pull granite-code:20b
     ```
