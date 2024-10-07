@@ -87,3 +87,4 @@ tags
 venv*
 dictionary.dic
 .ipynb_checkpoints/
+notebooks/state_of_the_union.txt

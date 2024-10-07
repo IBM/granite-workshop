@@ -12,7 +12,7 @@ The goal of this lab is to show how you can use RAG with an [IBM Granite](https:
 
 ## Pre-requisite
 
-This lab is a [Jupyter notebooks](https://jupyter.org/). Please follow the instructions in [pre-work](../pre-work/README.md) to run the lab.
+This lab is a [Jupyter notebook](https://jupyter.org/). Please follow the instructions in [pre-work](../pre-work/README.md) to run the lab.
 
 ## Lab
 
@@ -24,6 +24,8 @@ To run the notebook from your command line in Jupyter using the active virtual e
 ```shell
 jupyter notebook notebooks/RAG_with_Langchain.ipynb
 ```
+
+The path of the notebook file above is relative to the `granite-workshop` folder from the git clone in the [pre-work](../pre-work/README.md#clone-the-granite-workshop-repository).
 
 ## Credits
 
