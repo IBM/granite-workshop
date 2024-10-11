@@ -22,7 +22,7 @@ Running the lab notebooks locally on your computer requires the following steps:
 ### Local Prerequisites
 
 - Git
-- Python 3.10
+- Python 3.10 or 3.11
 
 ### Clone the Granite Workshop Repository
 
@@ -77,7 +77,7 @@ cd granite-workshop
 1. Install Jupyter notebook in the virtual environment:
 
     ```shell
-    python3 -m pip install notebook
+    python3 -m pip install notebook ipywidgets
     ```
 
     For more information, see the [Jupyter installation instructions](https://jupyter.org/install)
