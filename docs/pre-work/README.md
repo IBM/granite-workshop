@@ -8,7 +8,7 @@ logo: images/ibm-blue-background.png
 
 The labs in the workshop are [Jupyter notebooks](https://jupyter.org/). The notebooks can be run on your computer or remotely on [Google Colab](https://colab.google/). Follow the instructions in the section that follow on how you would like to run the notebooks.
 
-[Lab 1: Generating Bash Code with Granite Code](../lab-1/README.md) and [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) require Granite models to be served by a AI model runtime so that the models can be inferred or called. The workshop uses [Ollama](https://github.com/ollama/ollama) to serve the models.
+[Lab 1: Document Summarization](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) require Granite models to be served by a AI model runtime so that the models can be inferred or called. The workshop uses [Ollama](https://github.com/ollama/ollama) to serve the models.
 
 ## Running the Granite Notebooks Locally
 
@@ -104,7 +104,7 @@ Running the lab notebooks remotely using [Google Colab](https://colab.google/) r
 !!! note "Limitations"
     Running the Ollama server in Colab will limit the size of Granite models you can use and be _significantly_ slower when calling the Granite models.
 
-The Jupyter notebooks for [Lab 1: Generating Bash Code with Granite Code and Ollama](../lab-1/README.md) and [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) include cells for the following steps that  need to be run before proceeding with the remainder of the notebook.
+The Jupyter notebooks for [Lab 1: Document Summarization](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) include cells for the following steps that  need to be run before proceeding with the remainder of the notebook.
 
 1. Download and install Ollama in Colab
 

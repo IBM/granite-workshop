@@ -29,9 +29,10 @@ The introductory page of the workshop is broken down into the following sections
 |  |  |
 | :--- | :--- |
 | [Lab 0: Pre-work](pre-work/README.md)  | Pre-work for the workshop |
-| [Lab 1: Generating Bash Code with Granite Code](lab-1/README.md) | Learn how to use an AI model to generate programming code |
+| [Lab 1: Document Summarization](lab-1/README.md) | Learn how to use an AI model to summarize a work of literature |
 | [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](lab-2/README.md)| Learn how to generate specific information from a large document |
 | [Lab 3: Energy Demand Forecasting with Granite Timeseries (TTM)](lab-3/README.md) | Learn how to predict future trends using time series forecasting |
+| [Lab 4: Generating Bash Code with Granite Code](lab-4/README.md) | Learn how to use an AI model to generate programming code |
 
 ## Technology Used
 
