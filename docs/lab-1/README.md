@@ -1,14 +1,14 @@
 ---
 title: Granite Workshop Lab 1
-description: Generating Bash Code with Granite Code
+description: Document Summarization
 logo: images/ibm-blue-background.png
 ---
 
-# Generating Bash Code with Granite Code
+# Document Summarization
 
-[Generative AI](https://research.ibm.com/blog/what-is-generative-AI) refers to deep-learning models that can generate high-quality text, images, and other content based on the data they were trained on. A [Large Language Model (LLM)](https://en.wikipedia.org/wiki/Large_language_model) is a type of language model notable for its ability to achieve general-purpose language understanding and generation.
+[Text summarization](https://www.ibm.com/topics/text-summarization) condenses one or more texts into shorter summaries for enhanced information extraction.
 
-The goal of this lab is to show how you can use [prompt engineering](https://en.wikipedia.org/wiki/Prompt_engineering) with the [IBM Granite Code](https://www.ibm.com/granite/docs/models/code/) LLMs in order to generate [Bash](https://opensource.com/resources/what-bash) programming language or code.
+The goal of this lab is to show how you can use [IBM Granite Code](https://www.ibm.com/granite/docs/models/code/) models in order to apply long document summarization techniques to a work of literature.
 
 ## Prerequisites
 
@@ -16,17 +16,17 @@ This lab is a [Jupyter notebook](https://jupyter.org/). Please follow the instru
 
 ## Lab
 
-[Generating Bash Code with Granite Code notebook]({{ config.repo_url }}/blob/{{ git.commit }}/notebooks/Text_to_Shell.ipynb "View in GitHub"){:target="_blank"}
-[![Generating Bash Code with Granite Code notebook](https://colab.research.google.com/assets/colab-badge.svg "Open In Colab")]({{ extra.colab_url }}/blob/{{ git.commit }}/notebooks/Text_to_Shell.ipynb){:target="_blank"}
+[Document Summarization notebook]({{ config.repo_url }}/blob/{{ git.commit }}/notebooks/Summarize.ipynb "View in GitHub"){:target="_blank"}
+[![Document Summarization notebook](https://colab.research.google.com/assets/colab-badge.svg "Open In Colab")]({{ extra.colab_url }}/blob/{{ git.commit }}/notebooks/Summarize.ipynb){:target="_blank"}
 
 To run the notebook from your command line in Jupyter using the active virtual environment from the [pre-work](../pre-work/README.md#install-jupyter), run:
 
 ```shell
-jupyter notebook notebooks/Text_to_Shell.ipynb
+jupyter notebook notebooks/Summarize.ipynb
 ```
 
 The path of the notebook file above is relative to the `granite-workshop` folder from the git clone in the [pre-work](../pre-work/README.md#clone-the-granite-workshop-repository).
 
 ## Credits
 
-This notebook is a modified version of the IBM Granite Community [Generating Bash Code with Granite Code](https://github.com/ibm-granite-community/granite-code-cookbook/blob/main/recipes/Text_to_Shell/Text_to_Shell.ipynb) notebook. Refer to the [IBM Granite Community](https://github.com/ibm-granite-community) for the official notebooks.
+This notebook is a modified version of the IBM Granite Community [Document Summarization](https://github.com/ibm-granite-community/granite-snack-cookbook/blob/main/recipes/Summarize/Summarize.ipynb) notebook. Refer to the [IBM Granite Community](https://github.com/ibm-granite-community) for the official notebooks.
