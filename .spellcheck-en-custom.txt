@@ -25,6 +25,7 @@ Jupyter
 Kaggle
 Langchain
 LLM
+Macbook
 Milvus
 ollama
 Ollama
