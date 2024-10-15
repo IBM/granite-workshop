@@ -6,39 +6,39 @@ logo: images/ibm-blue-background.png
 
 # Pre-work
 
-The labs in the workshop are [Jupyter notebooks](https://jupyter.org/). The notebooks can be run on your computer or remotely on the [Google Colab](https://colab.research.google.com) service. Check out [Running the Granite Notebooks](#running-the-granite-notebooks) section on how to setup the way you want to run the notebooks.
+The labs in the workshop are [Jupyter notebooks](https://jupyter.org/). The notebooks can be run on your computer or remotely on the [Google Colab](https://colab.research.google.com) service. Check out the [Running the Granite Notebooks](#running-the-granite-notebooks) section on how to setup the way you want to run the notebooks.
 
 ## Running the Granite Notebooks
 
 The notebooks can be run:
 
-- [on your computer](#running-the-granite-notebooks-locally) OR
-- [remotely on the Google Colab service](#running-the-granite-notebooks-remotely-colab)
+- [Locally on your computer](#running-the-granite-notebooks-locally) OR
+- [Remotely on the Google Colab service](#running-the-granite-notebooks-remotely-colab)
 
 Follow the instructions in one of the sub-sections that follow on how you would like to run the notebooks.
 
-### Running the Granite Notebooks Locally
+## Running the Granite Notebooks Locally
 
 It is recommended if you want to run the lab notebooks locally on your computer that you have:
 
 - A computer or laptop
 - Knowledge of [Git](https://git-scm.com/) and [Python](https://www.python.org/)
 
-If not then it recommended to go to the [Running the Granite Notebooks Remotely (Colab)](#running-the-granite-notebooks-remotely-colab) section instead.
+If not, then it recommended to go to the [Running the Granite Notebooks Remotely (Colab)](#running-the-granite-notebooks-remotely-colab) section instead.
 
 Running the lab notebooks locally on your computer requires the following steps:
 
 - [Local Prerequisites](#local-prerequisites)
 - [Clone the Granite Workshop Repository](#clone-the-granite-workshop-repository)
-- [Serving the AI Granite Models](#serving-the-ai-granite-models)
+- [Serving the Granite AI Models](#serving-the-granite-ai-models)
 - [Install Jupyter](#install-jupyter)
 
-#### Local Prerequisites
+### Local Prerequisites
 
 - Git
 - Python 3.10 or 3.11
 
-#### Clone the Granite Workshop Repository
+### Clone the Granite Workshop Repository
 
 Clone the workshop repo and cd into the repo directory.
 
@@ -47,22 +47,22 @@ git clone https://github.com/IBM/granite-workshop.git
 cd granite-workshop
 ```
 
-#### Serving the AI Granite Models
+### Serving the Granite AI Models
 
-[Lab 1: Document Summarization](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) require Granite models to be served by a AI model runtime so that the models can be inferred or called. There are 2 options to serve the models as follows:
+[Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) require Granite models to be served by a AI model runtime so that the models can be invoked or called. There are 2 options to serve the models as follows:
 
 - [Running Ollama Locally](#running-ollama-locally) OR
-- [Replicate](https://replicate.com/)
+- [Replicate](#replicate)
 
-##### Running Ollama Locally
+#### Running Ollama Locally
 
-It is recommended if you want to run [Ollama](https://ollama.com/) locally on your computer to serve models that you have:
+It is recommended if you want to run [Ollama](https://ollama.com/) locally on your computer to serve models that you have a computer with:
 
-- A computer or laptop with:
-  - GPU processor
-  - 32G RAM (minimum)
+- GPU processor
+- At least 32GB RAM
 
-> **Note:** This was tested on Mac M1 with 32G RAM.
+!!! note "Tested system"
+    This was tested on a Macbook with an M1 processor and 32GB RAM.
 
 If you computer is unable to serve the models then it is recommended to go to the [Replicate](#replicate) section.
 
@@ -82,7 +82,7 @@ Running Ollama locally on your computer requires the following steps:
     ollama serve
     ```
 
-1. Pull down the Granite models you will want to use in the workshop. Larger models take more memory to run.
+1. In another terminal window, pull down the Granite models you will want to use in the workshop. Larger models take more memory to run.
 
     ```shell
     ollama pull granite-code:3b
@@ -90,11 +90,11 @@ Running Ollama locally on your computer requires the following steps:
     ollama pull granite-code:20b
     ```
 
-##### Replicate
+#### Replicate
 
 1. Create a [Replicate](https://replicate.com/) account. You will need a [GitHub](https://github.com/) account to do this.
 
-1. Add credit to your Replicate Account (optional). To remove a barrier to entry to try the Granite Code models on the Replicate platform, use [this link](https://replicate.com/invites/a8717bfe-2f3d-4a52-88ed-1356231cdf03) to add a small amount of credit to your Replicate account.
+1. Add credit to your Replicate Account (optional). To remove a barrier to entry to try the Granite models on the Replicate platform, use [this link](https://replicate.com/invites/a8717bfe-2f3d-4a52-88ed-1356231cdf03) to add a small amount of credit to your Replicate account.
 
 1. Create a Replicate [API Token](https://replicate.com/account/api-tokens).
 
@@ -104,9 +104,9 @@ Running Ollama locally on your computer requires the following steps:
     export REPLICATE_API_TOKEN=<your_replicate_api_token>
     ```
 
-#### Install Jupyter
+### Install Jupyter
 
-> **Note:** "Use a virtual environment"
+!!! note "Use a virtual environment"
     Before installing dependencies and to avoid conflicts in your environment, it is advisable to use a [virtual environment (venv)](https://docs.python.org/3/library/venv.html).
 
 1. Create virtual environment:
@@ -124,7 +124,7 @@ Running Ollama locally on your computer requires the following steps:
 1. Install Jupyter notebook in the virtual environment:
 
     ```shell
-    python3 -m pip install notebook ipywidgets
+    python3 -m pip install --require-virtualenv notebook ipywidgets
     ```
 
     For more information, see the [Jupyter installation instructions](https://jupyter.org/install)
@@ -135,32 +135,37 @@ Running Ollama locally on your computer requires the following steps:
     jupyter notebook <notebook-file-path>
     ```
 
-### Running the Granite Notebooks Remotely (Colab)
+## Running the Granite Notebooks Remotely (Colab)
 
-Running the lab notebooks remotely using [Google Colab](https://colab.research.google.com) require the following steps:
+Running the lab notebooks remotely using [Google Colab](https://colab.research.google.com) requires the following steps:
 
 - [Colab Prerequisites](#colab-prerequisites)
-- [Serving AI Models in Colab](#serving-ai-models-in-colab)
+- [Serving the Granite AI Models for Colab](#serving-the-granite-ai-models-for-colab)
 
-#### Colab Prerequisites
+### Colab Prerequisites
 
 - [Google Colab](https://colab.research.google.com) requires a Google account that you're logged into
 
-#### Serving AI Models in Colab
+### Serving the Granite AI Models for Colab
 
-[Lab 1: Document Summarization](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) require Granite models to be served by a AI model runtime so that the models can be inferred or called. There are 2 options to serve the models in Colab as follows:
+[Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) require Granite models to be served by a AI model runtime so that the models can be invoked or called. There are 2 options to serve the models when using Colab as follows:
 
 - [Ollama running in Colab](#ollama-running-in-colab) OR
-- [Replicate in Colab](#replicate-in-colab)
+- [Replicate for Colab](#replicate-for-colab)
 
-##### Ollama running in Colab
+#### Ollama running in Colab
 
-> **Note:** "Limitations"
-    Running the Ollama server in Colab will limit the size of Granite models you can use and be _significantly_ slower when calling the Granite models. It is therefore recommended to use [Replicate in Colab](#replicate-in-colab) instead.
+!!! note "Limitations"
+    Running the Ollama server in Colab will limit the size of Granite models you can use and be _significantly_ slower when calling the Granite models. It is therefore recommended to use [Replicate for Colab](#replicate-for-colab) instead.
 
-The Jupyter notebooks for [Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) include cells for the steps that need to be run to setup Ollama to run in Colab. Click on the cells in the notebook when running it.
+!!! attention "GPU Hardware Accelerator"
+    Once each notebook has been opened in Colab, you can modify the notebook's runtime type to select a GPU hardware accelerator.
+    Using the "Runtime->Change runtime type" menu item, select "T4 GPU" instead of "CPU" and save.
+    This will improve the performance of the Ollama server.
 
-##### Replicate in Colab
+The Jupyter notebooks for [Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) include cells for the steps that need to be executed to run Ollama in Colab. Run these the cells in the notebook when you come to them.
+
+#### Replicate for Colab
 
 1. Create a [Replicate](https://replicate.com/) account. You will need a [GitHub](https://github.com/) account to do this.
 
