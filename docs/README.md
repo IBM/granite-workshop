@@ -12,7 +12,7 @@ demonstrates the value of [generative AI](https://developer.ibm.com/generative-a
 
 By the end of this workshop, you will be able to:
 
-* Summarize a text document by [prompting](https://en.wikipedia.org/wiki/Prompt_engineering) a language model
+* Summarize a text document using [text summarization](https://www.ibm.com/topics/text-summarization)
 * Generate specific information from a large document using the [RAG](https://research.ibm.com/blog/retrieval-augmented-generation-RAG) technique
 * Predict future trends using [time series forecasting](https://research.ibm.com/blog/AI-time-series-forecasting)
 * Generate programming code ([Bash](https://opensource.com/resources/what-bash)) by [prompting](https://en.wikipedia.org/wiki/Prompt_engineering) a code model
@@ -44,6 +44,7 @@ The technology used in the workshop is as follows:
 * [Jupyter notebooks](https://jupyter.org/)
 * [LangChain](https://www.langchain.com/)
 * [Ollama](https://ollama.com)
+* [Replicate](https://replicate.com/)
 
 ## Credits
 
