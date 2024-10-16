@@ -6,7 +6,7 @@ logo: images/ibm-blue-background.png
 
 # Pre-work
 
-The labs in the workshop are [Jupyter notebooks](https://jupyter.org/). The notebooks can be run on your computer or remotely on the [Google Colab](https://colab.research.google.com) service. Check out the [Running the Granite Notebooks](#running-the-granite-notebooks) section on how to setup the way you want to run the notebooks.
+The labs in the workshop are [Jupyter notebooks](https://jupyter.org/). The notebooks can be run on your computer or remotely on the [Google Colab](https://colab.research.google.com) service. Check out [Running the Granite Notebooks](#running-the-granite-notebooks) section on how to setup the way you want to run the notebooks.
 
 ## Running the Granite Notebooks
 
@@ -15,7 +15,7 @@ The notebooks can be run:
 - [Locally on your computer](#running-the-granite-notebooks-locally) OR
 - [Remotely on the Google Colab service](#running-the-granite-notebooks-remotely-colab)
 
-Follow the instructions in one of the sub-sections that follow on how you would like to run the notebooks.
+Follow the instructions in one of the sections that follow on how you would like to run the notebooks.
 
 ## Running the Granite Notebooks Locally
 
@@ -49,10 +49,10 @@ cd granite-workshop
 
 ### Serving the Granite AI Models
 
-[Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) require Granite models to be served by a AI model runtime so that the models can be invoked or called. There are 2 options to serve the models as follows:
+[Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) require Granite models to be served by an AI model runtime so that the models can be invoked or called. There are 2 options to serve the models as follows:
 
 - [Running Ollama Locally](#running-ollama-locally) OR
-- [Replicate](#replicate)
+- [Replicate AI Cloud Platform](#replicate-ai-cloud-platform)
 
 #### Running Ollama Locally
 
@@ -62,9 +62,9 @@ It is recommended if you want to run [Ollama](https://ollama.com/) locally on yo
 - At least 32GB RAM
 
 !!! note "Tested system"
-    This was tested on a Macbook with an M1 processor and 32GB RAM.
+    This was tested on a Macbook with an M1 processor and 32GB RAM. It maybe possible to serve models with a CPU and less memory.
 
-If you computer is unable to serve the models then it is recommended to go to the [Replicate](#replicate) section.
+If you computer is unable to serve the models, then it is recommended to go to the [Replicate AI Cloud Platform](#replicate-ai-cloud-platform) section instead.
 
 Running Ollama locally on your computer requires the following steps:
 
@@ -90,7 +90,9 @@ Running Ollama locally on your computer requires the following steps:
     ollama pull granite-code:20b
     ```
 
-#### Replicate
+#### Replicate AI Cloud Platform
+
+[Replicate](https://replicate.com/) is a cloud platform that will host and serve AI models for you. It is recommended if you do not have the hardware to serve models.
 
 1. Create a [Replicate](https://replicate.com/) account. You will need a [GitHub](https://github.com/) account to do this.
 
@@ -148,24 +150,27 @@ Running the lab notebooks remotely using [Google Colab](https://colab.research.g
 
 ### Serving the Granite AI Models for Colab
 
-[Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) require Granite models to be served by a AI model runtime so that the models can be invoked or called. There are 2 options to serve the models when using Colab as follows:
+[Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) require Granite models to be served by an AI model runtime so that the models can be invoked or called. There are 2 options to serve the models when using Colab as follows:
 
 - [Ollama running in Colab](#ollama-running-in-colab) OR
-- [Replicate for Colab](#replicate-for-colab)
+- [Replicate AI Cloud Platform for Colab](#replicate-ai-cloud-platform-for-colab)
 
 #### Ollama running in Colab
 
 !!! note "Limitations"
-    Running the Ollama server in Colab will limit the size of Granite models you can use and be _significantly_ slower when calling the Granite models. It is therefore recommended to use [Replicate for Colab](#replicate-for-colab) instead.
+    Running the Ollama server in Colab will limit the size of Granite models you can use and be _significantly_ slower when calling the Granite models. It is therefore recommended to use [Replicate AI Cloud Platform for Colab](#replicate-ai-cloud-platform-for-colab) instead.
 
 !!! attention "GPU Hardware Accelerator"
     Once each notebook has been opened in Colab, you can modify the notebook's runtime type to select a GPU hardware accelerator.
     Using the "Runtime->Change runtime type" menu item, select "T4 GPU" instead of "CPU" and save.
     This will improve the performance of the Ollama server.
+    There are limitations on using a GPU hardware accelerator especially on the free tier. Check out documentation for more details.
 
-The Jupyter notebooks for [Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) include cells for the steps that need to be executed to run Ollama in Colab. Run these the cells in the notebook when you come to them.
+The Jupyter notebooks for [Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) include cells for the steps that need to be executed to run Ollama in Colab. Run the relevant cells when you are running the notebook.
 
-#### Replicate for Colab
+#### Replicate AI Cloud Platform for Colab
+
+[Replicate](https://replicate.com/) is a cloud platform that will host and serve AI models for you. It is recommended if you do not have the hardware to serve models.
 
 1. Create a [Replicate](https://replicate.com/) account. You will need a [GitHub](https://github.com/) account to do this.
 
