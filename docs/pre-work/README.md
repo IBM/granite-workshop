@@ -68,7 +68,7 @@ If you computer is unable to serve the models, then it is recommended to go to t
 
 Running Ollama locally on your computer requires the following steps:
 
-1. [Download and install Ollama](https://github.com/ollama/ollama?tab=readme-ov-file#ollama), if you haven't already. **Ollama v0.3.14+ is required.**
+1. [Download and install Ollama](https://github.com/ollama/ollama?tab=readme-ov-file#ollama), if you haven't already. **Ollama v0.3.14+ is required, so please upgrade if on an earlier version.**
 
     On macOS, you can use Homebrew to install with
 
