@@ -156,10 +156,7 @@ Running the lab notebooks remotely using [Google Colab](https://colab.research.g
 
 ### Serving the Granite AI Models for Colab
 
-[Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) require Granite models to be served by an AI model runtime so that the models can be invoked or called. There are 2 options to serve the models when using Colab as follows:
-
-- [Replicate AI Cloud Platform for Colab](#replicate-ai-cloud-platform-for-colab) OR
-- [Ollama running in Colab](#ollama-running-in-colab)
+[Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) require Granite models to be served by an AI model runtime so that the models can be invoked or called.
 
 #### Replicate AI Cloud Platform for Colab
 
@@ -172,16 +169,3 @@ Running the lab notebooks remotely using [Google Colab](https://colab.research.g
 1. Create a Replicate [API Token](https://replicate.com/account/api-tokens).
 
 1. Add your Replicate API Token to the Colab Secrets manager to securely store it. Open [Google Colab](https://colab.research.google.com) and click on the 🔑 Secrets tab in the left panel. Click "New Secret" and enter `REPLICATE_API_TOKEN` as the key, and paste your token into the value field. Toggle the button on the left to allow notebook access to the secret.
-
-#### Ollama running in Colab
-
-!!! note "Limitations"
-    Running the Ollama server in Colab will limit the size of Granite models you can use and be _significantly_ slower when calling the Granite models. It is therefore recommended to use [Replicate AI Cloud Platform for Colab](#replicate-ai-cloud-platform-for-colab) instead.
-
-!!! attention "GPU Hardware Accelerator"
-    Once each notebook has been opened in Colab, you can modify the notebook's runtime type to select a GPU hardware accelerator.
-    Using the "Runtime->Change runtime type" menu item, select "T4 GPU" instead of "CPU" and save.
-    This will improve the performance of the Ollama server.
-    There are limitations on using a GPU hardware accelerator especially on the free tier. Check out documentation for more details.
-
-The Jupyter notebooks for [Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) include cells for the steps that need to be executed to run Ollama in Colab. Run the relevant cells when you are running the notebook.
