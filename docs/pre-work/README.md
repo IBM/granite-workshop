@@ -51,12 +51,28 @@ cd granite-workshop
 
 [Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) require Granite models to be served by an AI model runtime so that the models can be invoked or called. There are 2 options to serve the models as follows:
 
-- [Running Ollama Locally](#running-ollama-locally) OR
 - [Replicate AI Cloud Platform](#replicate-ai-cloud-platform)
+- [Running Ollama Locally](#running-ollama-locally) OR
+
+#### Replicate AI Cloud Platform
+
+[Replicate](https://replicate.com/) is a cloud platform that will host and serve AI models for you.
+
+1. Create a [Replicate](https://replicate.com/) account. You will need a [GitHub](https://github.com/) account to do this.
+
+1. Add credit to your Replicate Account (optional). To remove a barrier to entry to try the Granite models on the Replicate platform, use [this link](https://replicate.com/invites/a8717bfe-2f3d-4a52-88ed-1356231cdf03) to add a small amount of credit to your Replicate account.
+
+1. Create a Replicate [API Token](https://replicate.com/account/api-tokens).
+
+1. Set your Replicate API Token as an environment variable in your terminal where you will run the notebook:
+
+    ```shell
+    export REPLICATE_API_TOKEN=<your_replicate_api_token>
+    ```
 
 #### Running Ollama Locally
 
-It is recommended if you want to run [Ollama](https://ollama.com/) locally on your computer to serve models that you have a computer with:
+If you want to run the AI models locally on your computer, you can use [Ollama](https://ollama.com/). You will need to have a computer with:
 
 - GPU processor
 - At least 32GB RAM
@@ -76,35 +92,24 @@ Running Ollama locally on your computer requires the following steps:
     brew install ollama
     ```
 
-1. Start the Ollama server.
+1. Start the Ollama server. You will leave this running during the workshop.
 
     ```shell
     ollama serve
     ```
 
-1. In another terminal window, pull down the Granite models you will want to use in the workshop. Larger models take more memory to run.
+1. In another terminal window, pull down the Granite models you will want to use in the workshop. Larger models take more memory to run but can give better results.
 
     ```shell
     ollama pull granite3-dense:2b
     ollama pull granite3-dense:8b
-    ollama pull granite-code:3b
-    ollama pull granite-code:8b
     ```
 
-#### Replicate AI Cloud Platform
-
-[Replicate](https://replicate.com/) is a cloud platform that will host and serve AI models for you. It is recommended if you do not have the hardware to serve models.
-
-1. Create a [Replicate](https://replicate.com/) account. You will need a [GitHub](https://github.com/) account to do this.
-
-1. Add credit to your Replicate Account (optional). To remove a barrier to entry to try the Granite models on the Replicate platform, use [this link](https://replicate.com/invites/a8717bfe-2f3d-4a52-88ed-1356231cdf03) to add a small amount of credit to your Replicate account.
-
-1. Create a Replicate [API Token](https://replicate.com/account/api-tokens).
-
-1. Set your Replicate API Token as an environment variable in your terminal where you will run the notebook:
+    For [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md), you will also need at least one of the following Granite Code models.
 
     ```shell
-    export REPLICATE_API_TOKEN=<your_replicate_api_token>
+    ollama pull granite-code:3b
+    ollama pull granite-code:8b
     ```
 
 ### Install Jupyter
@@ -153,8 +158,20 @@ Running the lab notebooks remotely using [Google Colab](https://colab.research.g
 
 [Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) require Granite models to be served by an AI model runtime so that the models can be invoked or called. There are 2 options to serve the models when using Colab as follows:
 
-- [Ollama running in Colab](#ollama-running-in-colab) OR
-- [Replicate AI Cloud Platform for Colab](#replicate-ai-cloud-platform-for-colab)
+- [Replicate AI Cloud Platform for Colab](#replicate-ai-cloud-platform-for-colab) OR
+- [Ollama running in Colab](#ollama-running-in-colab)
+
+#### Replicate AI Cloud Platform for Colab
+
+[Replicate](https://replicate.com/) is a cloud platform that will host and serve AI models for you.
+
+1. Create a [Replicate](https://replicate.com/) account. You will need a [GitHub](https://github.com/) account to do this.
+
+1. Add credit to your Replicate Account (optional). To remove a barrier to entry to try the Granite Code models on the Replicate platform, use [this link](https://replicate.com/invites/a8717bfe-2f3d-4a52-88ed-1356231cdf03) to add a small amount of credit to your Replicate account.
+
+1. Create a Replicate [API Token](https://replicate.com/account/api-tokens).
+
+1. Add your Replicate API Token to the Colab Secrets manager to securely store it. Open [Google Colab](https://colab.research.google.com) and click on the 🔑 Secrets tab in the left panel. Click "New Secret" and enter `REPLICATE_API_TOKEN` as the key, and paste your token into the value field. Toggle the button on the left to allow notebook access to the secret.
 
 #### Ollama running in Colab
 
@@ -168,15 +185,3 @@ Running the lab notebooks remotely using [Google Colab](https://colab.research.g
     There are limitations on using a GPU hardware accelerator especially on the free tier. Check out documentation for more details.
 
 The Jupyter notebooks for [Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) include cells for the steps that need to be executed to run Ollama in Colab. Run the relevant cells when you are running the notebook.
-
-#### Replicate AI Cloud Platform for Colab
-
-[Replicate](https://replicate.com/) is a cloud platform that will host and serve AI models for you. It is recommended if you do not have the hardware to serve models.
-
-1. Create a [Replicate](https://replicate.com/) account. You will need a [GitHub](https://github.com/) account to do this.
-
-1. Add credit to your Replicate Account (optional). To remove a barrier to entry to try the Granite Code models on the Replicate platform, use [this link](https://replicate.com/invites/a8717bfe-2f3d-4a52-88ed-1356231cdf03) to add a small amount of credit to your Replicate account.
-
-1. Create a Replicate [API Token](https://replicate.com/account/api-tokens).
-
-1. Add your Replicate API Token to the Colab Secrets manager to securely store it. Open [Google Colab](https://colab.research.google.com) and click on the 🔑 Secrets tab in the left panel. Click "New Secret" and enter `REPLICATE_API_TOKEN` as the key, and paste your token into the value field. Toggle the button on the left to allow notebook access to the secret.
