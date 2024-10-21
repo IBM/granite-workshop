@@ -68,7 +68,7 @@ If you computer is unable to serve the models, then it is recommended to go to t
 
 Running Ollama locally on your computer requires the following steps:
 
-1. [Download and install Ollama](https://github.com/ollama/ollama?tab=readme-ov-file#ollama), if you haven't already.
+1. [Download and install Ollama](https://github.com/ollama/ollama?tab=readme-ov-file#ollama), if you haven't already. **Ollama v0.3.14+ is required.**
 
     On macOS, you can use Homebrew to install with
 
@@ -88,6 +88,8 @@ Running Ollama locally on your computer requires the following steps:
     ollama pull granite-code:3b
     ollama pull granite-code:8b
     ollama pull granite-code:20b
+    ollama pull granite3-dense:2b
+    ollama pull granite3-dense:8b
     ```
 
 #### Replicate AI Cloud Platform
