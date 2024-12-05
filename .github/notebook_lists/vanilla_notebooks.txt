@@ -1,0 +1,4 @@
+notebooks/Summarize.ipynb
+notebooks/RAG_with_Langchain.ipynb
+notebooks/Time_Series_Getting_Started.ipynb
+notebooks/Text_to_Shell.ipynb
