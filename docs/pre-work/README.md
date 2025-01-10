@@ -101,8 +101,8 @@ Running Ollama locally on your computer requires the following steps:
 1. In another terminal window, pull down the Granite models you will want to use in the workshop. Larger models take more memory to run but can give better results.
 
     ```shell
-    ollama pull granite3-dense:2b
-    ollama pull granite3-dense:8b
+    ollama pull granite3.1-dense:2b
+    ollama pull granite3.1-dense:8b
     ```
 
     For [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md), you will also need at least one of the following Granite Code models.
