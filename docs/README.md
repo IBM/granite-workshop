@@ -52,5 +52,3 @@ The technology used in the workshop is as follows:
 * [Martin Hickey](https://github.com/hickeyma)
 * [Ming Zhao](https://github.com/mingxzhao)
 * The notebooks used in this workshop are versions of notebooks from the [IBM Granite Community](https://github.com/ibm-granite-community) modified for the workshop needs
-
-<img src="https://count.asgharlabs.io/count?p=/main_granite_workshop_page">
