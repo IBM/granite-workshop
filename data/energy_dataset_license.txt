@@ -1,8 +1,0 @@
-Dowloaded from:
-https://www.kaggle.com/datasets/nicholasjhana/energy-consumption-generation-prices-and-weather
-
-Sources:
-https://transparency.entsoe.eu/ https://www.esios.ree.es/en/market-and-prices https://openweathermap.org/api
-
-License:
-CC0: Public Domain
