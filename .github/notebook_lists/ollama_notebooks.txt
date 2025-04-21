@@ -1,0 +1,5 @@
+# model requires more system memory (21.5 GiB) than is available (18.0 GiB) [granite3.3:2b]
+# notebooks/Summarize.ipynb
+
+notebooks/RAG_with_Langchain.ipynb
+notebooks/Text_to_Shell.ipynb
