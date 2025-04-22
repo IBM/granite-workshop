@@ -54,7 +54,9 @@ jobs:
       - name: "Harden Runner"
         uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
         with:
-          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+          disable-sudo-and-containers: true
+          egress-policy: block
+          allowed-endpoints: |+
 
       - name: Checkout
         if: ${{ inputs.pr }}
@@ -126,7 +128,9 @@ jobs:
       - name: "Harden Runner"
         uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
         with:
-          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+          disable-sudo-and-containers: true
+          egress-policy: block
+          allowed-endpoints: |+
 
       - name: Pull Request dispatch
         if: ${{ inputs.pr }}
