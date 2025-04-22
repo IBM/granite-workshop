@@ -31,35 +31,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: "Harden Runner"
+        uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
       - name: 'Checkout'
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: 'Setup Pages'
         if: ${{ github.event_name != 'pull_request' }}
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.4.2
 
-      - name: 'Setup Python 3.12'
-        uses: actions/setup-python@v5
+      - name: 'Setup uv'
+        uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.5.0
         with:
           python-version: 3.12
-
-      - name: 'Create venv'
-        run: |
-          python3 -m venv --upgrade-deps venv
-
-      - name: 'Install mkdocs'
-        run: |
-          source venv/bin/activate
-          python3 -m pip install 'mkdocs-material[imaging]' 'mkdocs-macros-plugin'
+          enable-cache: false
 
       - name: 'Build website'
         run: |
-          source venv/bin/activate
-          mkdocs build --strict
+          uv tool run --with 'mkdocs-macros-plugin' --with 'mkdocs-material[imaging]' mkdocs build --strict
 
       - name: 'Upload artifact'
         if: ${{ github.event_name != 'pull_request' }}
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
           path: 'site/' # mkdocs default site_dir
 
@@ -71,6 +67,11 @@ jobs:
     needs: build
     if: ${{ github.event_name != 'pull_request' }}
     steps:
+      - name: "Harden Runner"
+        uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
       - name: 'Deploy to GitHub Pages'
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
