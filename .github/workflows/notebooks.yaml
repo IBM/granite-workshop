@@ -56,7 +56,9 @@ jobs:
         with:
           disable-sudo-and-containers: true
           egress-policy: block
-          allowed-endpoints: |+
+          allowed-endpoints: >
+            api.github.com:443
+            github.com:443
 
       - name: Checkout
         if: ${{ inputs.pr }}
@@ -130,7 +132,9 @@ jobs:
         with:
           disable-sudo-and-containers: true
           egress-policy: block
-          allowed-endpoints: |+
+          allowed-endpoints: >
+            api.github.com:443
+            github.com:443
 
       - name: Pull Request dispatch
         if: ${{ inputs.pr }}
