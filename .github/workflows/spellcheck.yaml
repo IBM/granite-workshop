@@ -23,26 +23,25 @@ jobs:
   spellcheck:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Checkout'
-        uses: actions/checkout@v4
+      - name: "Harden Runner"
+        uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
-      - name: 'Setup Python 3.12'
-        uses: actions/setup-python@v5
+      - name: 'Checkout'
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: 'Setup uv'
+        uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.5.0
         with:
           python-version: 3.12
+          enable-cache: false
 
-      - name: 'Create venv'
+      - name: 'Install aspell'
         run: |
-          python3 -m venv --upgrade-deps venv
-
-      - name: 'Install pyspelling and aspell'
-        run: |
-          sudo sudo apt-get update
+          sudo apt-get update
           sudo apt-get install -y aspell aspell-en
-          source venv/bin/activate
-          python3 -m pip install 'pyspelling'
 
       - name: 'Check spelling'
         run: |
-          source venv/bin/activate
-          python3 -m pyspelling --config .spellcheck.yml --spellchecker aspell
+          uv tool run pyspelling --config .spellcheck.yml --spellchecker aspell
