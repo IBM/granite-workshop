@@ -51,8 +51,8 @@ cd granite-workshop
 
 [Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) require Granite models to be served by an AI model runtime so that the models can be invoked or called. There are 2 options to serve the models as follows:
 
-- [Replicate AI Cloud Platform](#replicate-ai-cloud-platform)
-- [Running Ollama Locally](#running-ollama-locally) OR
+- [Replicate AI Cloud Platform](#replicate-ai-cloud-platform) OR
+- [Running Ollama Locally](#running-ollama-locally)
 
 #### Replicate AI Cloud Platform
 
@@ -149,6 +149,8 @@ Running the lab notebooks remotely using [Google Colab](https://colab.research.g
 
 - [Colab Prerequisites](#colab-prerequisites)
 - [Serving the Granite AI Models for Colab](#serving-the-granite-ai-models-for-colab)
+
+!!! note "Slow network tip" If your network connection is slow, consider using a different Colab runtime. From the navigation bar, select `Runtime->Change runtime type`, then select either GPU- or TPU-based hardware acceleration.
 
 ### Colab Prerequisites
 
