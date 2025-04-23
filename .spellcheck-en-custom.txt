@@ -43,6 +43,7 @@ tbody
 th
 thead
 Timeseries
+TPU
 tsfm
 TSFM
 TTM
