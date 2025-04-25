@@ -60,7 +60,7 @@ jobs:
 
       - name: 'Build website'
         run: |
-          uv tool run --with 'mkdocs-macros-plugin' --with 'mkdocs-material[imaging]' mkdocs build --strict
+          uvx --with 'mkdocs-macros-plugin' --with 'mkdocs-material[imaging]' -- mkdocs build --strict
 
       - name: 'Upload artifact'
         if: ${{ github.event_name != 'pull_request' }}
