@@ -6,7 +6,7 @@ This is the Granite foundation models AI workshop hosted on GitHub Pages using M
 
 ## License & Authors
 
-If you would like to see the detailed LICENSE click [here](./LICENSE).
+See the [LICENSE](./LICENSE) file for the details of the license.
 
 - Authors:
   - [BJ Hargrave](https://github.com/bjhargrave)
