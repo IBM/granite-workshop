@@ -8,7 +8,7 @@ logo: images/ibm-blue-background.png
 
 [Text summarization](https://www.ibm.com/topics/text-summarization) condenses one or more texts into shorter summaries for enhanced information extraction.
 
-The goal of this lab is to show how you can use [IBM Granite](https://www.ibm.com/granite/docs/models/granite/) models in order to apply long document summarization techniques to a work of literature.
+The goal of this lab is to show how you can use [IBM Granite](https://www.ibm.com/granite/docs/models/granite/) models in order to apply document summarization techniques to a large document.
 
 ## Prerequisites
 

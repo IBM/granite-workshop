@@ -49,10 +49,12 @@ cd granite-workshop
 
 ### Serving the Granite AI Models
 
-[Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) require Granite models to be served by an AI model runtime so that the models can be invoked or called. There are 2 options to serve the models as follows:
+The labs require Granite models to be served by an AI model runtime so that the models can be invoked or called. There are 2 options to serve the models as follows:
 
 - [Replicate AI Cloud Platform](#replicate-ai-cloud-platform) OR
 - [Running Ollama Locally](#running-ollama-locally)
+
+[Lab 5: Multimodal RAG using Granite and Docling](../lab-5/README.md) requires Replicate.
 
 #### Replicate AI Cloud Platform
 
@@ -75,7 +77,7 @@ cd granite-workshop
 If you want to run the AI models locally on your computer, you can use [Ollama](https://ollama.com/). You will need to have a computer with:
 
 - GPU processor
-- At least 32GB RAM
+- At least 32GB RAM, preferably more
 
 !!! note "Tested system"
     This was tested on a Macbook with an M1 processor and 32GB RAM. It maybe possible to serve models with a CPU and less memory.
@@ -84,7 +86,7 @@ If you computer is unable to serve the models, then it is recommended to go to t
 
 Running Ollama locally on your computer requires the following steps:
 
-1. [Download and install Ollama](https://github.com/ollama/ollama?tab=readme-ov-file#ollama), if you haven't already. **Ollama v0.3.14+ is required, so please upgrade if on an earlier version.**
+1. [Download and install Ollama](https://github.com/ollama/ollama?tab=readme-ov-file#ollama), if you haven't already. **Ollama v0.5.13+ is required, so please upgrade if on an earlier version.**
 
     On macOS, you can use Homebrew to install with
 
@@ -103,13 +105,6 @@ Running Ollama locally on your computer requires the following steps:
     ```shell
     ollama pull granite3.3:2b
     ollama pull granite3.3:8b
-    ```
-
-    For [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md), you will also need at least one of the following Granite Code models.
-
-    ```shell
-    ollama pull granite-code:3b
-    ollama pull granite-code:8b
     ```
 
 ### Install Jupyter
@@ -158,7 +153,7 @@ Running the lab notebooks remotely using [Google Colab](https://colab.research.g
 
 ### Serving the Granite AI Models for Colab
 
-[Lab 1: Document Summarization with Granite](../lab-1/README.md), [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](../lab-2/README.md) and [Lab 4: Generating Bash Code with Granite Code](../lab-4/README.md) require Granite models to be served by an AI model runtime so that the models can be invoked or called.
+The labs require Granite models to be served by an AI model runtime so that the models can be invoked or called.
 
 #### Replicate AI Cloud Platform for Colab
 
@@ -166,7 +161,7 @@ Running the lab notebooks remotely using [Google Colab](https://colab.research.g
 
 1. Create a [Replicate](https://replicate.com/) account. You will need a [GitHub](https://github.com/) account to do this.
 
-1. Add credit to your Replicate Account (optional). To remove a barrier to entry to try the Granite Code models on the Replicate platform, use [this link](https://replicate.com/invites/a8717bfe-2f3d-4a52-88ed-1356231cdf03) to add a small amount of credit to your Replicate account.
+1. Add credit to your Replicate Account (optional). To remove a barrier to entry to try the Granite models on the Replicate platform, use [this link](https://replicate.com/invites/a8717bfe-2f3d-4a52-88ed-1356231cdf03) to add a small amount of credit to your Replicate account.
 
 1. Create a Replicate [API Token](https://replicate.com/account/api-tokens).
 
