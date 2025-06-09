@@ -17,7 +17,8 @@ nav:
     - Lab 1. Summarize a text document with Granite: lab-1/README.md
     - Lab 2. Retrieval Augmented Generation (RAG) with Langchain: lab-2/README.md
     - Lab 3. Energy Demand Forecasting with Granite Timeseries (TTM): lab-3/README.md
-    - Lab 4. Generating Bash Code with Granite Code: lab-4/README.md
+    - Lab 4. Entity Extraction from text using Granite: lab-4/README.md
+    - Lab 5. Multimodal RAG using Granite and Docling: lab-5/README.md
   - References:
     - IBM Granite Community: https://github.com/ibm-granite-community
 
@@ -25,7 +26,7 @@ nav:
 ## DO NOT CHANGE BELOW THIS LINE
 
 # Copyright
-copyright: Copyright &copy; 2024- IBM Research
+copyright: Copyright &copy; 2025- IBM Research
 
 # Theme
 theme:

@@ -18,4 +18,3 @@ runs:
       shell: bash
       run: |
         ollama pull granite3.3:8b
-        ollama pull granite-code:8b

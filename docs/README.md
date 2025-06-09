@@ -15,7 +15,8 @@ By the end of this workshop, you will be able to:
 * Summarize a text document using [text summarization](https://www.ibm.com/topics/text-summarization)
 * Generate specific information from a large document using the [RAG](https://research.ibm.com/blog/retrieval-augmented-generation-RAG) technique
 * Predict future trends using [time series forecasting](https://research.ibm.com/blog/AI-time-series-forecasting)
-* Generate programming code ([Bash](https://opensource.com/resources/what-bash)) by [prompting](https://en.wikipedia.org/wiki/Prompt_engineering) a code model
+* Extract entities from an unstructured text document using [entity recognition](https://www.ibm.com/think/topics/named-entity-recognition)
+* Multimodal RAG using a [multimodal](https://www.ibm.com/think/topics/multimodal-ai) LLM (MLLM) on a PDF file with images.
 
 ### About this workshop
 
@@ -33,7 +34,8 @@ The introductory page of the workshop is broken down into the following sections
 | [Lab 1: Document Summarization with Granite](lab-1/README.md) | Learn how to use an AI model to summarize a work of literature |
 | [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](lab-2/README.md)| Learn how to generate specific information from a large document |
 | [Lab 3: Energy Demand Forecasting with Granite Timeseries (TTM)](lab-3/README.md) | Learn how to predict future trends using time series forecasting |
-| [Lab 4: Generating Bash Code with Granite Code](lab-4/README.md) | Learn how to use an AI model to generate programming code |
+| [Lab 4: Entity Extraction from text using Granite](lab-4/README.md) | Learn how to use an AI model to extract entities from unstructured text. |
+| [Lab 5: Multimodal RAG using Granite and Docling](lab-5/README.md) | Learn how to use AI models to generate specific information from unstructured PDFs with images. |
 
 ## Technology Used
 
