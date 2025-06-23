@@ -98,7 +98,7 @@ jobs:
         3.11
         3.12
       ref: ${{ needs.test_workflow_ready.outputs.ref }}
-      all: ${{ fromJSON(needs.test_workflow_ready.outputs.all) }}
+      all: ${{ fromJSON(needs.test_workflow_ready.outputs.all || 'false') }}
 
   ollama:
     needs:
@@ -112,7 +112,7 @@ jobs:
       python-versions: >-
         3.11
       ref: ${{ needs.test_workflow_ready.outputs.ref }}
-      all: ${{ fromJSON(needs.test_workflow_ready.outputs.all) }}
+      all: ${{ fromJSON(needs.test_workflow_ready.outputs.all || 'false') }}
       action: .github/actions/ollama-setup
       free-disk-space: '{"large-packages": false}'  # Takes a long time
 
