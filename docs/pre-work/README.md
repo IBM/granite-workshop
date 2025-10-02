@@ -86,7 +86,7 @@ If you computer is unable to serve the models, then it is recommended to go to t
 
 Running Ollama locally on your computer requires the following steps:
 
-1. [Download and install Ollama](https://github.com/ollama/ollama?tab=readme-ov-file#ollama), if you haven't already. **Ollama v0.5.13+ is required, so please upgrade if on an earlier version.**
+1. [Download and install Ollama](https://github.com/ollama/ollama?tab=readme-ov-file#ollama), if you haven't already. **A recent version of Ollama is required, so please upgrade if on an older version.**
 
     On macOS, you can use Homebrew to install with
 
@@ -103,8 +103,7 @@ Running Ollama locally on your computer requires the following steps:
 1. In another terminal window, pull down the Granite models you will want to use in the workshop. Larger models take more memory to run but can give better results.
 
     ```shell
-    ollama pull granite3.3:2b
-    ollama pull granite3.3:8b
+    ollama pull ibm/granite4:micro
     ```
 
 ### Install Jupyter
