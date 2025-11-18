@@ -28,11 +28,11 @@ The introductory page of the workshop is broken down into the following sections
 
 ## Agenda
 
-|  |  |
+| | |
 | :--- | :--- |
-| [Lab 0: Pre-work](pre-work/README.md)  | Pre-work for the workshop |
+| [Lab 0: Pre-work](pre-work/README.md) | Pre-work for the workshop |
 | [Lab 1: Document Summarization with Granite](lab-1/README.md) | Learn how to use an AI model to summarize a work of literature |
-| [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](lab-2/README.md)| Learn how to generate specific information from a large document |
+| [Lab 2: Retrieval Augmented Generation (RAG) with Langchain](lab-2/README.md) | Learn how to generate specific information from a large document |
 | [Lab 3: Energy Demand Forecasting with Granite Timeseries (TTM)](lab-3/README.md) | Learn how to predict future trends using time series forecasting |
 | [Lab 4: Entity Extraction from text using Granite](lab-4/README.md) | Learn how to use an AI model to extract entities from unstructured text. |
 | [Lab 5: Multimodal RAG using Granite and Docling](lab-5/README.md) | Learn how to use AI models to generate specific information from unstructured PDFs with images. |
