@@ -54,4 +54,4 @@ jobs:
 
       - name: 'Check spelling'
         run: |
-          uvx -- pyspelling --config .spellcheck.yml --spellchecker aspell
+          uvx -- pyspelling --config .spellcheck.yml

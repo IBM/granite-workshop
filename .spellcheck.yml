@@ -1,3 +1,5 @@
+spellchecker: aspell
+
 matrix:
 - name: markdown
   aspell:
