@@ -3,7 +3,7 @@
 # Run `pre-commit install` to activate pre-commit hooks
 repos:
   - repo: https://github.com/kynan/nbstripout
-    rev: 0.9.0
+    rev: 0.9.1
     hooks:
       - id: nbstripout
         args: [
@@ -11,7 +11,7 @@ repos:
           "--keep-metadata-keys", "cell.metadata.collapsed cell.metadata.scrolled",
         ]
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.20.0
+    rev: v0.21.0
     hooks:
     - id: markdownlint-cli2
   - repo: 'https://github.com/facelessuser/pyspelling.git'
