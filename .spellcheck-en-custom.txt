@@ -25,7 +25,6 @@ Langchain
 LLM
 Macbook
 Meta's
-Milvus
 MLLM
 multimodal
 Multimodal
