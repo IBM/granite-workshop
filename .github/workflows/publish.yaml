@@ -12,7 +12,7 @@ on:
       - 'docs/**'
       - 'notebooks/**'
       - 'mkdocs.yml'
-      - '.github/workflows/publish.yml' # This workflow
+      - '.github/workflows/publish.ya?ml' # This workflow
   workflow_dispatch:
 
 env:
@@ -24,8 +24,6 @@ defaults:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 jobs:
   build:
@@ -50,6 +48,8 @@ jobs:
 
       - name: 'Checkout'
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
       - name: 'Setup Pages'
         if: ${{ github.event_name != 'pull_request' }}
@@ -72,6 +72,9 @@ jobs:
           path: 'site/' # mkdocs default site_dir
 
   publish:
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
