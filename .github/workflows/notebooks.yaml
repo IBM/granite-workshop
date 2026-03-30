@@ -16,14 +16,14 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/notebooks.yaml' # This workflow
+      - '.github/workflows/notebooks.ya?ml' # This workflow
       - '.github/notebook_lists/*' # Notebook lists
       - 'notebooks/**/*.ipynb'
   pull_request:
     branches:
       - main
     paths:
-      - '.github/workflows/notebooks.yaml' # This workflow
+      - '.github/workflows/notebooks.ya?ml' # This workflow
       - '.github/notebook_lists/*' # Notebook lists
       - 'notebooks/**/*.ipynb'
 
@@ -65,6 +65,7 @@ jobs:
         id: checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
+          persist-credentials: false
           ref: ${{ inputs.pr && format('refs/pull/{0}/head',inputs.pr) || '' }}
 
       - name: Pull Request dispatch
@@ -88,7 +89,7 @@ jobs:
       - test_workflow_ready
     permissions:
       contents: read
-    uses: ibm-granite-community/utils/.github/workflows/test_notebook.yaml@main
+    uses: ibm-granite-community/utils/.github/workflows/test_notebook.yaml@main  # zizmor: ignore[unpinned-uses]
     secrets:
       REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
     with:
@@ -105,7 +106,7 @@ jobs:
       - test_workflow_ready
     permissions:
       contents: read
-    uses: ibm-granite-community/utils/.github/workflows/test_notebook.yaml@main
+    uses: ibm-granite-community/utils/.github/workflows/test_notebook.yaml@main  # zizmor: ignore[unpinned-uses]
     with:
       notebook-lists: |
         .github/notebook_lists/ollama_notebooks.txt
