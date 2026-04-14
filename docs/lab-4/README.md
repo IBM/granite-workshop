@@ -1,7 +1,8 @@
 ---
-title: Granite Workshop Lab 4
+title: Lab 4. Entity Extraction from text using Granite
 description: Entity Extraction from text using Granite
 logo: images/ibm-blue-background.png
+notebook: notebooks/entity_extraction.ipynb
 ---
 
 # Entity Extraction from text using Granite
@@ -16,13 +17,13 @@ This lab is a [Jupyter notebook](https://jupyter.org/). Please follow the instru
 
 ## Lab
 
-[![Entity Extraction from text using Granite notebook](https://badgen.net/badge/icon/github?icon=github&label=View%20on "View on GitHub")]({{ config.repo_url }}/blob/{{ git.commit }}/notebooks/entity_extraction.ipynb){:target="_blank"}
-[![Entity Extraction from text using Granite notebook](https://colab.research.google.com/assets/colab-badge.svg "Open In Colab")]({{ extra.colab_url }}/blob/{{ git.commit }}/notebooks/entity_extraction.ipynb){:target="_blank"}
+[![Entity Extraction from text using Granite notebook](https://badgen.net/badge/icon/github?icon=github&label=View%20on "View on GitHub")]({{ config.repo_url }}/blob/{{ git.commit }}/{{ notebook }}){:target="_blank"}
+[![Entity Extraction from text using Granite notebook](https://colab.research.google.com/assets/colab-badge.svg "Open In Colab")]({{ extra.colab_url }}/blob/{{ git.commit }}/{{ notebook }}){:target="_blank"}
 
 To run the notebook from your command line in Jupyter using the active virtual environment from the [pre-work](../pre-work/README.md#install-jupyter), run:
 
 ```shell
-jupyter notebook notebooks/entity_extraction.ipynb
+jupyter notebook {{ notebook }}
 ```
 
 The path of the notebook file above is relative to the `granite-workshop` folder from the git clone in the [pre-work](../pre-work/README.md#clone-the-granite-workshop-repository).

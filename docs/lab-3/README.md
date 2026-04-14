@@ -1,7 +1,8 @@
 ---
-title: Granite Workshop Lab 3
+title: Lab 3. Energy Demand Forecasting with Granite Timeseries (TTM)
 description: Energy Demand Forecasting with Granite Timeseries (TTM)
 logo: images/ibm-blue-background.png
+notebook: notebooks/Time_Series_Getting_Started.ipynb
 ---
 
 # Energy Demand Forecasting with Granite Timeseries (TTM)
@@ -16,13 +17,13 @@ This lab is a [Jupyter notebook](https://jupyter.org/). Please follow the instru
 
 ## Lab
 
-[![Energy Demand Forecasting with Granite Timeseries (TTM) notebook](https://badgen.net/badge/icon/github?icon=github&label=View%20on "View on GitHub")]({{ config.repo_url }}/blob/{{ git.commit }}/notebooks/Time_Series_Getting_Started.ipynb){:target="_blank"}
-[![Energy Demand Forecasting with Granite Timeseries (TTM) notebook](https://colab.research.google.com/assets/colab-badge.svg "Open In Colab")]({{ extra.colab_url }}/blob/{{ git.commit }}/notebooks/Time_Series_Getting_Started.ipynb){:target="_blank"}
+[![Energy Demand Forecasting with Granite Timeseries (TTM) notebook](https://badgen.net/badge/icon/github?icon=github&label=View%20on "View on GitHub")]({{ config.repo_url }}/blob/{{ git.commit }}/{{ notebook }}){:target="_blank"}
+[![Energy Demand Forecasting with Granite Timeseries (TTM) notebook](https://colab.research.google.com/assets/colab-badge.svg "Open In Colab")]({{ extra.colab_url }}/blob/{{ git.commit }}/{{ notebook }}){:target="_blank"}
 
 To run the notebook from your command line in Jupyter using the active virtual environment from the [pre-work](../pre-work/README.md#install-jupyter), run:
 
 ```shell
-jupyter notebook notebooks/Time_Series_Getting_Started.ipynb
+jupyter notebook {{ notebook }}
 ```
 
 The path of the notebook file above is relative to the `granite-workshop` folder from the git clone in the [pre-work](../pre-work/README.md#clone-the-granite-workshop-repository).
