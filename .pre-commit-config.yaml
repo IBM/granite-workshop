@@ -19,5 +19,5 @@ repos:
     hooks:
       - id: 'pyspelling'
         args: [
-          "--config", ".spellcheck.yml"
+          "--config", ".spellcheck.yaml"
         ]
