@@ -205,4 +205,6 @@ The labs require Granite models to be served by an AI model runtime so that the 
 
 1. Create a Replicate [API Token](https://replicate.com/account/api-tokens).
 
-1. Add your Replicate API Token to the Colab Secrets manager to securely store it. Open [Google Colab](https://colab.research.google.com) and click on the 🔑 Secrets tab in the left panel. Click "New Secret" and enter `REPLICATE_API_TOKEN` as the key, and paste your token into the value field. Toggle the button on the left to allow notebook access to the secret.
+1. Add your Replicate API Token to the Colab Secrets manager to securely store it. Open [Google Colab](https://colab.research.google.com) and click on the 🔑 Secrets tab in the left panel. Click "Add new secret" and enter `REPLICATE_API_TOKEN` into the name field and paste your token into the value field. Toggle the button on the left to allow notebook access to the secret.
+
+![Colab Secrets](../images/colab-secrets.png)
