@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+
 name: 'Additional Test Setup'
 description: 'Additional Test Setup for Ollama'
 runs:

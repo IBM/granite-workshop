@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+
 name: 'python_setup'
 description: 'Setup for Python and uv'
 
