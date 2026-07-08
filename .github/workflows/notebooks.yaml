@@ -17,6 +17,7 @@ on:
       - main
     paths:
       - '.github/workflows/notebooks.ya?ml' # This workflow
+      - '.github/actions/**' # Possibly used by this workflow
       - '.github/notebook_lists/*' # Notebook lists
       - 'notebooks/**/*.ipynb'
   pull_request:
@@ -24,6 +25,7 @@ on:
       - main
     paths:
       - '.github/workflows/notebooks.ya?ml' # This workflow
+      - '.github/actions/**' # Possibly used by this workflow
       - '.github/notebook_lists/*' # Notebook lists
       - 'notebooks/**/*.ipynb'
 
