@@ -21,7 +21,6 @@ jobs:
     permissions:
       pull-requests: write
       contents: write
-    name: "Check auto-merge"
     runs-on: ubuntu-latest
     steps:
       - name: "Fetch Dependabot Metadata"
