@@ -29,11 +29,18 @@ jobs:
         uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: "Enable auto-merge"
+      - name: "Wait for PR checks"
+        id: wait-for-pr-checks
         if: ${{ contains(fromJSON('["version-update:semver-minor","version-update:semver-patch"]'), steps.dependabot-metadata.outputs.update-type) }}
         run: |
-          gh pr checks "$PR_URL" --watch --fail-fast
-          gh pr merge --auto --merge "$PR_URL"
+          ./.github/scripts/wait-for-pr-checks.sh
         env:
-          PR_URL: ${{github.event.pull_request.html_url}}
+          PR: ${{github.event.pull_request.html_url}}
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: "Auto Merge"
+        if: ${{ steps.wait-for-pr-checks.outcome == 'success' }}
+        run: |
+          gh pr merge "$PR" --auto --merge
+        env:
+          PR: ${{github.event.pull_request.html_url}}
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
