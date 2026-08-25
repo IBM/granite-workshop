@@ -94,6 +94,7 @@ jobs:
     uses: ibm-granite-community/utils/.github/workflows/test_notebook.yaml@main
     secrets:
       REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
     with:
       notebook-lists: |
         .github/notebook_lists/vanilla_notebooks.txt
