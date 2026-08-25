@@ -115,7 +115,7 @@ Running Ollama locally on your computer requires the following steps:
 2. Pull the Granite model:
 
     ```shell
-    ollama pull granite4.1:3b
+    ollama pull granite4.2:3b
     ```
 
 3. Ollama runs automatically and exposes an OpenAI-compatible API at <http://localhost:11434>
